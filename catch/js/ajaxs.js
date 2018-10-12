@@ -7,8 +7,8 @@
 	    change();
 	    function change(){
 	        var Fs=doc.documentElement.clientWidth;
-	        var nFs=Fs/(Fs/20);
-	        //字体大小为20px;
+	        var nFs=Fs/(Fs/10);
+	        //字体大小为10px;
 	        doc.documentElement.style.fontSize=nFs+'px';
 	    }
 	})(window,document);
@@ -16,7 +16,7 @@
 	//ajax封装调用
 	function ajaxsd(url,type,data,suFn,erFn){
 		$.ajax({
-			url:"http://39.104.127.252:8081/"+url,
+			url:"http://39.104.127.252:8084/"+url,
 	 		xhrFields:{
 	           withCredentials:true
 	       	},

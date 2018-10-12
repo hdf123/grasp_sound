@@ -1,0 +1,61 @@
+body {
+  background: url(../../../img/login_02.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.login {
+  width: 80%;
+  margin: 0 auto;
+}
+.login > div:nth-child(1) {
+  width: 8rem;
+  height: 8rem;
+  margin: 2.5rem auto 5.5rem;
+}
+.login > div:nth-child(1) > img {
+  width: 100%;
+}
+.login > div:nth-child(2) div {
+  width: 100%;
+  height: 4.15rem;
+  margin: 1rem auto 0;
+}
+.login > div:nth-child(2) div > input {
+  width: 100%;
+  height: 100%;
+  padding: 0 1.5rem;
+  color: white;
+  background-color: rgba(81, 85, 97, 0.5);
+  font: normal 1.6rem PingFang-SC-Medium;
+}
+.login > div:nth-child(2) div > input::-webkit-input-placeholder {
+  color: #eeeeee;
+  font: normal 1.6rem PingFang-SC-Medium;
+}
+.login > a {
+  width: 100%;
+  height: 4.15rem;
+  margin-top: 5.55rem;
+  font: normal 1.8rem PingFang-SC-Medium;
+  background-color: #1adbd0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login > div:nth-child(4) {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem auto 0;
+  text-align: center;
+}
+.login > div:nth-child(4) > a {
+  display: block;
+  box-sizing: content-box;
+  padding: 0.3rem 0.5rem;
+  color: #e7e8e9;
+  font: normal 1.6rem PingFang-SC-Medium;
+}
+
+/*# sourceMappingURL=login.css.map */
