@@ -6,39 +6,35 @@ html, body {
   left: 0;
 }
 
-header {
-  width: 100%;
+.headers {
   height: 6rem;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
-header > div:nth-child(1) {
+.headers > div:nth-child(1) {
   width: 75%;
-  height: 2rem;
+  height: 2.6rem;
   margin: 0.5rem auto 0;
 }
-header > div:nth-child(1) > input {
+.headers > div:nth-child(1) > input {
   width: 100%;
   height: 100%;
   border: 1px solid #eeeeee;
 }
-header > div:nth-child(2) {
+.headers > div:nth-child(2) {
   width: 4rem;
-  margin: 1rem auto 0;
+  height: 2.9rem;
+  margin: 0 auto;
   text-align: center;
   font: normal 1.8rem STHeitiSC-Light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-section {
-  width: 100%;
-  overflow: auto;
-  position: absolute;
-  top: 6rem;
-  left: 0;
+.sets {
+  top: 6.125rem;
   bottom: 5rem;
 }
-section > div {
+.sets > div {
   width: 95%;
   margin: 0 auto;
   display: flex;
@@ -63,7 +59,7 @@ section > div {
   align-items: center;
   justify-content: space-between;
   position: absolute;
-  top: 0;
+  top: 0.5rem;
   left: 5%;
 }
 .videos > div:nth-child(2) > div:nth-child(1) {
@@ -71,8 +67,8 @@ section > div {
   align-items: center;
 }
 .videos > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) {
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   overflow: hidden;
 }
 .videos > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > img {
@@ -100,36 +96,12 @@ section > div {
 }
 .videos > div:nth-child(3) > div span {
   display: block;
-  color: red;
+  color: gray;
   font-size: 1rem;
 }
 
-.footersd {
-  width: 100%;
-  height: 5rem;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: space-around;
-  box-shadow: 0rem 0rem 0.5rem 0rem rgba(164, 164, 164, 0.33);
-}
-.footersd > div {
-  width: 25%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding-bottom: 0.5rem;
-  color: #767575;
-  font-size: 2.5rem;
-}
-.footersd > div > span {
-  font-size: 1rem;
-}
-.footersd > div:nth-child(1) {
-  color: white;
-  background-color: #36e0d6;
+.footersd > a:nth-child(1) {
+  color: #36e0d6;
 }
 
 /*# sourceMappingURL=home.css.map */

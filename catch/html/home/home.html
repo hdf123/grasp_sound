@@ -3,9 +3,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title></title>
+		<title>首页</title>
 		<link rel="stylesheet" href="../../css/base.css" />
 		<link rel="stylesheet" href="../../css/iconfont.css" />
+		<link rel="stylesheet" href="../../css/layout.css" />
 		<link rel="stylesheet" href="css/home.css" />
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/ajaxs.js" type="text/javascript" charset="utf-8"></script>
@@ -14,144 +15,14 @@
 	
 </style>
 	<body>
-		<header>
+		<header class="headers">
 			<div>
 				<input type="text" />
 			</div>
 			<div>推荐</div>
 		</header>
-		<section>
+		<section class="sets">
 			<div>
-				<div class="videos">
-					<img src="../../img/home_01.png" alt="" />
-					<div>
-						<div>
-							<div>
-								<img src="../../img/home_03.png" alt="" />
-							</div>
-							<div>小芳</div>
-						</div>
-						<div>关注</div>
-					</div>
-					<div>
-						<div class="iconfont icon-pinglun1">
-							<span>11</span>
-						</div>
-						<div class="iconfont icon-z-likeFill">
-							<span>22</span>
-						</div>
-						<div class="iconfont icon-star">
-							<span>33</span>
-						</div>
-						<div class="iconfont icon-zhibo-">
-							<span>44</span>
-						</div>
-					</div>
-				</div>
-				<div class="videos">
-					<img src="../../img/home_01.png" alt="" />
-					<div>
-						<div>
-							<div>
-								<img src="../../img/home_03.png" alt="" />
-							</div>
-							<div>小芳</div>
-						</div>
-						<div>关注</div>
-					</div>
-					<div>
-						<div class="iconfont icon-pinglun1">
-							<span>11</span>
-						</div>
-						<div class="iconfont icon-z-likeFill">
-							<span>22</span>
-						</div>
-						<div class="iconfont icon-star">
-							<span>33</span>
-						</div>
-						<div class="iconfont icon-zhibo-">
-							<span>44</span>
-						</div>
-					</div>
-				</div>
-				<div class="videos">
-					<img src="../../img/home_01.png" alt="" />
-					<div>
-						<div>
-							<div>
-								<img src="../../img/home_03.png" alt="" />
-							</div>
-							<div>小芳</div>
-						</div>
-						<div>关注</div>
-					</div>
-					<div>
-						<div class="iconfont icon-pinglun1">
-							<span>11</span>
-						</div>
-						<div class="iconfont icon-z-likeFill">
-							<span>22</span>
-						</div>
-						<div class="iconfont icon-star">
-							<span>33</span>
-						</div>
-						<div class="iconfont icon-zhibo-">
-							<span>44</span>
-						</div>
-					</div>
-				</div>
-				<div class="videos">
-					<img src="../../img/home_01.png" alt="" />
-					<div>
-						<div>
-							<div>
-								<img src="../../img/home_03.png" alt="" />
-							</div>
-							<div>小芳</div>
-						</div>
-						<div>关注</div>
-					</div>
-					<div>
-						<div class="iconfont icon-pinglun1">
-							<span>11</span>
-						</div>
-						<div class="iconfont icon-z-likeFill">
-							<span>22</span>
-						</div>
-						<div class="iconfont icon-star">
-							<span>33</span>
-						</div>
-						<div class="iconfont icon-zhibo-">
-							<span>44</span>
-						</div>
-					</div>
-				</div>
-				<div class="videos">
-					<img src="../../img/home_01.png" alt="" />
-					<div>
-						<div>
-							<div>
-								<img src="../../img/home_03.png" alt="" />
-							</div>
-							<div>小芳</div>
-						</div>
-						<div>关注</div>
-					</div>
-					<div>
-						<div class="iconfont icon-pinglun1">
-							<span>11</span>
-						</div>
-						<div class="iconfont icon-z-likeFill">
-							<span>22</span>
-						</div>
-						<div class="iconfont icon-star">
-							<span>33</span>
-						</div>
-						<div class="iconfont icon-zhibo-">
-							<span>44</span>
-						</div>
-					</div>
-				</div>
 				<div class="videos">
 					<img src="../../img/home_01.png" alt="" />
 					<div>
@@ -285,18 +156,54 @@
 			</div>
 		</section>
 		<footer class="footersd">
-			<div id="home" class="iconfont icon-shouye">
+			<a href="./home.html" id="home" class="iconfont icon-shouye">
 				<span>首页</span>
+			</a>
+			<a href="./videos.html" id="videos" class="iconfont icon-shipin">
+				<span>小视频</span>
+			</a>
+			<div id="upvideo">
+				<img src="../../img/home_04.png" alt="" />
 			</div>
-			<div id="community" class="iconfont icon-shipin">
-				<span>社区</span>
-			</div>
-			<div id="Found" class="iconfont icon-xiaoxi">
-				<span>位置</span>
-			</div>
-			<div id="my" class="iconfont icon-ziyuan">
+			<a href="./message.html" id="message" class="iconfont icon-xiaoxi">
+				<span>消息</span>
+			</a>
+			<a href="./my.html" id="my" class="iconfont icon-ziyuan">
 				<span>我的</span>
-			</div>
+			</a>
 		</footer>
+
+<script type="text/javascript">
+	$(function(){
+		var _token = JSON.parse(localStorage.getItem('TT_TOKEN'));
+		/*$.ajax({
+			type:"get",
+			url:"./json/home.json",
+			dataType : "json",
+			success: function(data) {
+				console.log(data);
+			},
+	        error: function(error) {
+	            console.log(error);  
+	        }
+		});*/
+		var parameter={
+			token:_token,
+			page:1,
+			size:5,
+			userId:9
+		}
+		ajaxsd("user/token/"+_token+"?token="+_token,'post',parameter,function(data){
+			console.log(data);
+			ajaxsd("homepage/video/recommended",'post',parameter,function(data){
+				console.log(data);
+			},function(err){
+				console.log(err);
+			})
+		},function(err){
+			console.log(err);
+		})
+	})
+</script>
 	</body>
 </html>

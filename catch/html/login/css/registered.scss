@@ -1,4 +1,3 @@
-@import "../../../css/style.scss";
 body{
     background:url(../../../img/login_02.png);
     background-size:100%;
@@ -26,30 +25,12 @@ body{
                 height:100%;
                 padding:0 1.5rem;
                 color:white;
-                font:$fonta;
+                font:normal 1.8rem STHeitiSC-Light;
                 background-color:rgba(81,85,97,0);
             }
             >input::-webkit-input-placeholder {
                 color:#eeeeee;
-                font:$fonta;
-            }
-        }
-        >div:nth-child(2){
-            display: flex;
-            align-items: center;
-            >input{
-                width:60%;
-            }
-            >div{
-                width:40%;
-                height: 2.55rem;
-                color: #babcbd;
-                border-radius: 0.5rem;
-                border: solid 0.05rem #cbcfd2;
-                font:normal 1.4rem PingFang-SC-Medium;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                font:normal 1.8rem STHeitiSC-Light;
             }
         }
     }
@@ -59,6 +40,24 @@ body{
         margin-top:2.7rem;
         font:normal 1.8rem PingFang-SC-Medium;
         background-color: #1adbd0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+.posra{
+    display: flex;
+    align-items: center;
+    >input{
+        width:60%;
+    }
+    >div{
+        width:40%;
+        height: 2.55rem;
+        color: #babcbd;
+        border-radius: 0.5rem;
+        border: solid 0.05rem #cbcfd2;
+        font:normal 1.4rem PingFang-SC-Medium;
         display: flex;
         align-items: center;
         justify-content: center;

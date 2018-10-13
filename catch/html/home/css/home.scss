@@ -6,15 +6,11 @@ html, body {
     top: 0;
     left: 0;
 }
-header{
-    width: 100%;
+.headers{
     height:6rem;
-    position: absolute;
-    top: 0;
-    left: 0;
     >div:nth-child(1){
         width:75%;
-        height:2rem;
+        height:2.6rem;
         margin:0.5rem auto 0;
         >input{
             width:100%;
@@ -24,17 +20,17 @@ header{
     }
     >div:nth-child(2){
         width:4rem;
-        margin:1rem auto 0;
+        height:2.9rem;
+        margin:0 auto;
         text-align: center;
-        font:$fonta;
+        font:$fontb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
-section{
-    width: 100%;
-    overflow: auto;
-    position: absolute;
-    top: 6rem;
-    left: 0;
+.sets{
+    top:6.125rem;
     bottom:5rem;
     >div{
         width:95%;
@@ -60,26 +56,26 @@ section{
         align-items: center;
         justify-content: space-between;
         position: absolute;
-        top:0;
+        top:0.5rem;
         left:5%;
         >div:nth-child(1){
             display: flex;
             align-items:center;
             >div:nth-child(1){
-                width:3rem;
-                height:3rem;
+                width:2.5rem;
+                height:2.5rem;
                 overflow: hidden;
                 >img{
                     width:100%;
                 }
             }
             >div:nth-child(2){
-                font:$fontb;
+                font:$fonta;
                 margin-left:0.3rem;
             }
         }
         >div:nth-child(2){
-            font:$fontb;
+            font:$fonta;
         }
     }
     >div:nth-child(3){
@@ -95,36 +91,14 @@ section{
             margin-left:0.2rem;
             span{
                 display:block;
-                color:red;
+                color:gray;
                 font-size:1rem;
             }
         }
     }
 }
-.footersd {
-    width: 100%;
-    height:5rem;
-    position: absolute;
-    left:0;
-    bottom:0;
-    display: flex;
-    justify-content: space-around;
-    box-shadow: 0rem 0rem 0.5rem 0rem rgba(164, 164, 164, 0.33);
-    > div {
-        width:(100%/4);
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding-bottom:0.5rem;
-        color:#767575;
-        font-size:2.5rem;
-        > span {
-            font-size:1rem;
-        }
-    }
-    >div:nth-child(1){
-        color:white;
-        background-color: #36e0d6;
+.footersd{
+    >a:nth-child(1){
+        color:#36e0d6;
     }
 }

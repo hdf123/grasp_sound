@@ -1,0 +1,99 @@
+header {
+  width: 100%;
+  height: 5rem;
+}
+header > div {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  margin: 0.5rem auto 0;
+}
+header > div > div:nth-child(1) {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+header > div > div:nth-child(1) > img {
+  width: 100%;
+}
+header > div > div:nth-child(2) > p {
+  font: normal 1.8rem STHeitiSC-Light;
+  margin-left: 0.3rem;
+}
+
+.sets {
+  top: 5.125rem;
+  bottom: 5rem;
+}
+.sets > div {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.videos {
+  width: 48%;
+  height: 18rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  position: relative;
+}
+.videos > img {
+  width: 100%;
+  height: 100%;
+}
+.videos > div:nth-child(2) {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  top: 0.5rem;
+  left: 5%;
+}
+.videos > div:nth-child(2) > div:nth-child(1) {
+  display: flex;
+  align-items: center;
+}
+.videos > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) {
+  width: 2.5rem;
+  height: 2.5rem;
+  overflow: hidden;
+}
+.videos > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > img {
+  width: 100%;
+}
+.videos > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) {
+  font: normal 1.5rem PingFang-SC-Medium;
+  margin-left: 0.3rem;
+}
+.videos > div:nth-child(2) > div:nth-child(2) {
+  font: normal 1.5rem PingFang-SC-Medium;
+}
+.videos > div:nth-child(3) {
+  position: absolute;
+  left: 0;
+  bottom: 0.3rem;
+  display: flex;
+}
+.videos > div:nth-child(3) > div {
+  color: gray;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: flex-end;
+  margin-left: 0.2rem;
+}
+.videos > div:nth-child(3) > div span {
+  display: block;
+  color: gray;
+  font-size: 1rem;
+}
+
+.footersd > a:nth-child(2) {
+  color: #36e0d6;
+}
+
+/*# sourceMappingURL=videos.css.map */
