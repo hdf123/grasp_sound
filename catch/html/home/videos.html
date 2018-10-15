@@ -6,22 +6,53 @@
 		<title>小视频</title>
 		<link rel="stylesheet" href="../../css/base.css" />
 		<link rel="stylesheet" href="../../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/swiper-4.3.3.min.css"/>
 		<link rel="stylesheet" href="../../css/layout.css" />
 		<link rel="stylesheet" href="css/videos.css" />
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/ajaxs.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../../js/swiper-4.3.3.min.js"></script>
 	</head>
 	<body>
-		<header class="headers">
-			<div>
-				<div>
-					<img src="../../img/home_03.png" alt="" />
-				</div>
-				<div>
-					<p>小李子</p>
-				</div>
-			</div>
-		</header>
+		<div class="swiper-container" id="swiper1">
+		    <div class="swiper-wrapper">
+		        <div class="swiper-slide">
+		        	<div>
+		        		全部
+		        	</div>
+		        </div>
+		        <div class="swiper-slide">
+		        	<div>
+		        		分类1
+		        	</div>
+		        </div>
+		        <div class="swiper-slide">
+		        	<div>
+		        		分类2
+		        	</div>
+		        </div>
+		        <div class="swiper-slide">
+		        	<div>
+		        		分类3
+		        	</div>
+		        </div>
+		        <div class="swiper-slide">
+		        	<div>
+		        		分类4
+		        	</div>
+		        </div>
+		        <div class="swiper-slide">
+		        	<div>
+		        		分类5
+		        	</div>
+		        </div>
+		        <div class="swiper-slide">
+		        	<div>
+		        		分类6
+		        	</div>
+		        </div>
+		    </div>
+		</div>
 		<section class="sets">
 			<div>
 				<div class="videos">
@@ -95,5 +126,22 @@
 				<span>我的</span>
 			</a>
 		</footer>
+		
+<script type="text/javascript">
+	$(function(){
+		var mySwiper1 = new Swiper ('#swiper1',{//推荐recommend
+		    direction: 'horizontal',
+		    slidesPerView:5,
+		    zoom:{
+		    	maxRatio:2,
+		    	minRatio:1
+		    }
+		})
+		$("#swiper1 .swiper-slide").click(function(){
+			var index=$(this).index();
+			console.log(index);
+		})
+	})
+</script>
 	</body>
 </html>

@@ -1,0 +1,73 @@
+@import "../../../css/style.scss";
+.headers{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    color: #ffffff;
+    background:#5cc0be;
+    box-shadow: 0rem 0rem 0.269rem 0.073rem rgba(173, 173, 173, 0.52);
+    >div{
+        height:3.5rem;
+    }
+    > div:nth-child(1){
+        width: 3rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size:2rem;
+    }
+    > div:nth-child(2){
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-left:3rem;
+        font:$fontb;
+    }
+}
+.sets{
+    top:3.5rem;
+    bottom:0;
+}
+.focusd{
+    width:100%;
+    border:1px solid #eeee;
+    >div{
+        width:90%;
+        height:4.5rem;
+        margin:0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin:0.5rem auto;
+        >div:nth-child(1){
+            display: flex;
+            >div:nth-child(1){
+                width:3.5rem;
+                height:3.5rem;
+                >img{
+                    width:100%;
+                    height:100%;
+                }
+            }
+            >div:nth-child(2){
+                height:100%;
+                margin-left:0.5rem;
+                display: flex;
+                flex-direction: column;
+                justify-content:space-around;
+            }
+        }
+        >div:nth-child(2){
+            height:100%;
+            font-size:2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

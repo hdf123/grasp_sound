@@ -1,29 +1,23 @@
-header {
+#swiper1 {
   width: 100%;
-  height: 5rem;
+  height: 4rem;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
-header > div {
-  width: 90%;
+#swiper1 .swiper-slide > div {
+  width: 100%;
+  height: 100%;
+  font: normal 1.5rem PingFang-SC-Medium;
   display: flex;
   align-items: center;
-  margin: 0.5rem auto 0;
-}
-header > div > div:nth-child(1) {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-  overflow: hidden;
-}
-header > div > div:nth-child(1) > img {
-  width: 100%;
-}
-header > div > div:nth-child(2) > p {
-  font: normal 1.8rem STHeitiSC-Light;
-  margin-left: 0.3rem;
+  justify-content: center;
+  border: 1px solid #eeeeee;
+  box-shadow: 0rem 0.5rem 0.269rem 0.073rem rgba(173, 173, 173, 0.05);
 }
 
 .sets {
-  top: 5.125rem;
+  top: 4.125rem;
   bottom: 5rem;
 }
 .sets > div {

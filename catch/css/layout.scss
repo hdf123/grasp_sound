@@ -10,7 +10,30 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
+    display: flex;
+    color: #ffffff;
+    background:#5cc0be;
     box-shadow: 0rem 0rem 0.269rem 0.073rem rgba(173, 173, 173, 0.52);
+    >div{
+        height:3.5rem;
+    }
+    > div:nth-child(1){
+        width: 3rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size:2rem;
+    }
+    > div:nth-child(2){
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-left:3rem;
+        font:normal 1.8rem STHeitiSC-Light;
+    }
 }
 .sets{
     width: 100%;
@@ -21,12 +44,12 @@ html, body {
 .footersd {
     width: 100%;
     height:5rem;
-    position: absolute;
+    position:absolute;
     left:0;
     bottom:0;
     display: flex;
     justify-content: space-around;
-    box-shadow: 0rem 0rem 0.5rem 0rem rgba(164, 164, 164, 0.33);
+    box-shadow: 0rem -0.2rem 0.3rem 0rem rgba(164, 164, 164, 0.33);
     >a{
         width:(100%/5);
         text-align: center;
@@ -51,7 +74,9 @@ html, body {
     background:#fff;
     box-shadow: 0rem -0.2rem 0.3rem 0.3rem rgba(54,224,214,0.2);
     overflow: hidden;
+    transform:rotate(180deg);
       >img{
+        display: block;
         width:100%;
       }
 }

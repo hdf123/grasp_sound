@@ -2,8 +2,123 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>我的</title>
+		<link rel="stylesheet" href="../../css/base.css" />
+		<link rel="stylesheet" href="../../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/swiper-4.3.3.min.css"/>
+		<link rel="stylesheet" href="../../css/layout.css" />
+		<link rel="stylesheet" href="css/my.css" />
+		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/ajaxs.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../../js/swiper-4.3.3.min.js"></script>
 	</head>
 	<body>
+		<header>
+			<div>
+				<div>
+					<div>这是啥?</div>
+					<div class="iconfont icon-shezhi"></div>
+				</div>
+				<div>
+					<div>
+						<div><img src="../../img/home_03.png"/></div>
+						<div>名字</div>
+					</div>
+					<div>
+						<div>上海</div>
+						<div>女</div>
+					</div>
+				</div>
+				<div>个人说明：<span>说点什么好呢说点什么好呢说点什么好呢说点什么好呢</span></div>
+			</div>
+			<div>
+				<div class="taba">
+					<div>
+						<div>视频</div>
+					</div>
+					<div>
+						<div>喜欢</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<section class="sets">
+			<div>
+				<div class="videoks">
+					<div>
+						<img src="../../img/home_02.jpg" alt="" />
+					</div>
+				</div>
+				<div class="videoks">
+					<div>
+						<img src="../../img/home_02.jpg" alt="" />
+					</div>
+				</div>
+				<div class="videoks">
+					<div>
+						<img src="../../img/home_02.jpg" alt="" />
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<img src="../../img/home_03.png" alt="" />
+						</div>
+						<div>那些年</div>
+						<div>爱心</div>
+					</div>
+				</div>
+				<div>
+					<div>
+						<div>
+							<img src="../../img/home_03.png" alt="" />
+						</div>
+						<div>那些年</div>
+						<div>爱心</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer class="footersd">
+			<a href="./home.html" id="home" class="iconfont icon-shouye">
+				<span>首页</span>
+			</a>
+			<a href="./videos.html" id="videos" class="iconfont icon-shipin">
+				<span>小视频</span>
+			</a>
+			<div id="upvideo">
+				<img src="../../img/home_04.png" alt="" />
+			</div>
+			<a href="./message.html" id="message" class="iconfont icon-xiaoxi">
+				<span>消息</span>
+			</a>
+			<a href="./my.html" id="my" class="iconfont icon-ziyuan">
+				<span>我的</span>
+			</a>
+		</footer>
+<script type="text/javascript">
+	$(function(){
+		$(".sets>div").hide();
+		$(".sets>div:eq(0)").show();
+		$(".taba>div").click(function(){
+			var index=$(this).index();
+			$(".taba>div").eq(index).children("div").css({
+				"border-bottom":"0.25rem solid #36E0D6"
+			}).parent().siblings().children("div").css({
+				"border":"none"
+			});
+			$(".sets>div").eq(index).show().siblings().hide();
+		})
+		
+		
+		
+		
+		
+		
+	})
+</script>
 	</body>
 </html>
