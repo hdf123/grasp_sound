@@ -1,4 +1,4 @@
-//rem大小设置
+//rem大小设置、ajax封装、上拉加载
 	(function(win,doc){
 	    //浏览器缩放大小时
 	    win.onresize=function(){
@@ -13,7 +13,7 @@
 	    }
 	})(window,document);
 	
-	//ajax封装调用
+//ajax封装调用
 	function ajaxsd(url,type,data,suFn,erFn){
 		$.ajax({
 			url:"http://39.104.127.252:8084/"+url,

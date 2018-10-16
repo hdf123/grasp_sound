@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>a1视频转换base64</title>
+		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<input type="file" accept="video/*" id="changes"/>
+		<!--<input type="file" accept="image/*" id="changes"/>-->
+		
+		<div id="videos"></div>
+<script type="text/javascript">
+	var _token = JSON.parse(localStorage.getItem('TT_TOKEN'));
+	$("#changes").change(function(){
+        var objUrl=this.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(objUrl);
+        reader.onload = function(e){
+         	var base=this.result;
+         	$("#videos").html("<video  controls='' autoplay='' name='media'><source src="+base+" type='video/mp4'></video>");
+			$.ajax({
+				url:"http://39.104.127.252:8084/pic/base64/upload",
+		 		xhrFields:{
+		           withCredentials:true
+		       	},
+				type:"post",
+		        dataType : "json",
+		        data:{
+		        	token:_token,
+		        	base64:base
+		        },
+				success: function(data) {
+					console.log(data);
+				},
+		        error: function(error) {
+		            console.log(error);         
+		        }
+			});
+        }
+	})
+</script>
+	</body>
+</html>
