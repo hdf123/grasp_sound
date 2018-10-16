@@ -34,6 +34,10 @@
     ._p span{
         font-size: 15px;
     }
+    #output{
+    	width:100%;
+    	border:1px solid red;
+    }
 </style>
 	<body>
 		<div id="content"  >
@@ -71,11 +75,9 @@
 		    </div>
 		    <p class="_p"><span>上传视频</span>：<button class="btn btn-primary" type="button" onclick="sub();">上传</button></p>
 		    <!--预览框-->
-		    <div class="preview">
-		        
-		    </div>
+		    <div class="preview"></div>
 		</div>
-		
+		<div id="output"></div>
 <script type="text/javascript"> 
 	var _token = JSON.parse(localStorage.getItem('TT_TOKEN'));
     var xhr;//异步请求对象
@@ -168,26 +170,30 @@
         	var data=JSON.parse(evt.target.responseText)
             console.log("上传成功！");
             $(".preview").append("<video  controls='' id='video1' width='100%' name='media'><source src="+data.data+" type='video/mp4'></video>");
-            var video1=document.querySelector("#video1");
-            video1.addEventListener('loadeddata',captureImage);
+            funk();
         }else{
             alert("上传失败");
         }
-			var captureImage = function(){
-			            var canvas = document.createElement("canvas");
-			            canvas.width = video.videoWidth * scale;
-			            canvas.height = video.videoHeight * scale;
-			            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-			 
-			            var img = document.createElement("img");
-			            img.src = canvas.toDataURL("image/png");
-			            output.appendChild(img);
-			}
-        
     }
     //上传失败
     function uploadFailed(evt) {
         alert("上传失败！");
+    }
+    function funk(){
+		var scale = 0.8;
+		var output = document.getElementById("output");
+		var video = document.getElementById("video1");
+		video.addEventListener('loadeddata', captureImage);
+		var captureImage = function() {   
+			console.log(2);   
+			var canvas = document.createElement("canvas");      
+			canvas.width = video.videoWidth * scale;      
+			canvas.height = video.videoHeight * scale;      
+			canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);       
+			var img = document.createElement("img");      
+			img.src = canvas.toDataURL("image/png");      
+			output.appendChild(img);
+		}; 
     }
 </script>
 	</body>
