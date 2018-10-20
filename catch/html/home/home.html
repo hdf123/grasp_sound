@@ -191,7 +191,6 @@
 			localStorage.setItem('user', JSON.stringify(data.data));
 //首页推荐
 			ajaxsd("homepage/video/recommended",'post',parameter,function(data){
-				console.log(data);
 				if(data.status==321){
 					window.location.href="../login/login.html";
 				}
@@ -200,6 +199,10 @@
 			})
 		},function(err){
 			console.log(err);
+		})
+//上传视频
+		$("#upvideo").click(function(){
+			window.location.href="releases.html";
 		})
 	})
 </script>

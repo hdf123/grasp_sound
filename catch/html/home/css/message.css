@@ -68,12 +68,15 @@
 .friends > div > div > div:nth-child(1) {
   width: 4rem;
   height: 4rem;
+  border-radius: 50%;
+  overflow: hidden;
 }
 .friends > div > div > div:nth-child(1) > img {
   width: 100%;
   height: 100%;
 }
 .friends > div > div > div:nth-child(2) {
+  width: 60%;
   height: 4rem;
   display: flex;
   flex-direction: column;
@@ -81,8 +84,11 @@
   margin-left: 0.5rem;
 }
 .friends > div > div > div:nth-child(2) > div {
-  display: flex;
-  align-items: center;
+  width: 16.5rem;
+  line-height: 2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .friends > div > div > div:nth-child(2) > div:nth-child(1) {
   font: normal 1.5rem PingFang-SC-Medium;
