@@ -1,0 +1,54 @@
+html {
+  background: #eeeeee;
+}
+
+.sets {
+  top: 4.2rem;
+  bottom: 0;
+}
+.sets > div {
+  width: 100%;
+}
+
+.tits {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: white;
+}
+.tits > div:nth-child(1) {
+  display: flex;
+  align-items: center;
+}
+.tits > div:nth-child(1) > div:nth-child(1) {
+  width: 4.5rem;
+  height: 4.5rem;
+  overflow: hidden;
+}
+.tits > div:nth-child(1) > div:nth-child(1) > img {
+  width: 100%;
+  height: 100%;
+}
+.tits > div:nth-child(1) > div:nth-child(2) {
+  font: normal 1.6rem STHeitiSC-Light;
+  margin-left: 0.5rem;
+}
+.tits > div:nth-child(2) {
+  font: 600 2.2rem AdobeHeitiStd-Regular;
+}
+
+.uls {
+  width: 100%;
+  margin: 1rem auto;
+}
+.uls > li {
+  width: 100%;
+  padding: 1rem;
+  background: white;
+  border-bottom: 1px solid #eeeeee;
+  font: normal 1.7rem AdobeHeitiStd-Regular;
+}
+
+/*# sourceMappingURL=setThe.css.map */

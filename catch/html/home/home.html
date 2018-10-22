@@ -49,110 +49,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="videos">
-					<img src="../../img/home_01.png" alt="" />
-					<div>
-						<div>
-							<div>
-								<img src="../../img/home_03.png" alt="" />
-							</div>
-							<div>小芳</div>
-						</div>
-						<div>关注</div>
-					</div>
-					<div>
-						<div class="iconfont icon-pinglun1">
-							<span>11</span>
-						</div>
-						<div class="iconfont icon-z-likeFill">
-							<span>22</span>
-						</div>
-						<div class="iconfont icon-star">
-							<span>33</span>
-						</div>
-						<div class="iconfont icon-zhibo-">
-							<span>44</span>
-						</div>
-					</div>
-				</div>
-				<div class="videos">
-					<img src="../../img/home_01.png" alt="" />
-					<div>
-						<div>
-							<div>
-								<img src="../../img/home_03.png" alt="" />
-							</div>
-							<div>小芳</div>
-						</div>
-						<div>关注</div>
-					</div>
-					<div>
-						<div class="iconfont icon-pinglun1">
-							<span>11</span>
-						</div>
-						<div class="iconfont icon-z-likeFill">
-							<span>22</span>
-						</div>
-						<div class="iconfont icon-star">
-							<span>33</span>
-						</div>
-						<div class="iconfont icon-zhibo-">
-							<span>44</span>
-						</div>
-					</div>
-				</div>
-				<div class="videos">
-					<img src="../../img/home_01.png" alt="" />
-					<div>
-						<div>
-							<div>
-								<img src="../../img/home_03.png" alt="" />
-							</div>
-							<div>小芳</div>
-						</div>
-						<div>关注</div>
-					</div>
-					<div>
-						<div class="iconfont icon-pinglun1">
-							<span>11</span>
-						</div>
-						<div class="iconfont icon-z-likeFill">
-							<span>22</span>
-						</div>
-						<div class="iconfont icon-star">
-							<span>33</span>
-						</div>
-						<div class="iconfont icon-zhibo-">
-							<span>44</span>
-						</div>
-					</div>
-				</div>
-				<div class="videos">
-					<img src="../../img/home_01.png" alt="" />
-					<div>
-						<div>
-							<div>
-								<img src="../../img/home_03.png" alt="" />
-							</div>
-							<div>小芳</div>
-						</div>
-						<div>关注</div>
-					</div>
-					<div>
-						<div class="iconfont icon-pinglun1">
-							<span>11</span>
-						</div>
-						<div class="iconfont icon-z-likeFill">
-							<span>22</span>
-						</div>
-						<div class="iconfont icon-star">
-							<span>33</span>
-						</div>
-						<div class="iconfont icon-zhibo-">
-							<span>44</span>
-						</div>
-					</div>
-				</div>
 			</div>
 		</section>
 		<footer class="footersd">
@@ -177,26 +73,111 @@
 	$(function(){
 		var _token = JSON.parse(localStorage.getItem('TT_TOKEN'));
 //获取个人信息
-		var parameter={
-			token:_token,
-			page:1,
-			size:5,
-			userId:9
-		}
-		ajaxsd("user/token/"+_token+"?token="+_token,'post',parameter,function(data){
+		ajaxsd("user/token/"+_token+"?token="+_token,'post',{},function(data){
 			console.log(data);
 			if(data.status==321){
 				window.location.href="../login/login.html";
 			}
 			localStorage.setItem('user', JSON.stringify(data.data));
 //首页推荐
+			/*var parameter={
+				token:_token,
+				page:1,
+				size:5,
+				userId:data.data.userid
+			}
 			ajaxsd("homepage/video/recommended",'post',parameter,function(data){
-				if(data.status==321){
+				console.log(data);
+				if(data.status==200){
+					var homes="";
+					for(i in videos){
+						homes+=`<div class="videos" data-ids=${videos[i].id}>
+									<img src=${videos[i].v01} alt="" />
+									<div>
+										<div>
+											<div>
+												<img src=${videos[i].imgages} alt="" />
+											</div>
+											<div>${videos[i].name}</div>
+										</div>
+										<div>关注</div>
+									</div>
+									<div>
+										<div class="iconfont icon-pinglun1">
+											<span>${videos[i].pinglun}</span>
+										</div>
+										<div class="iconfont icon-z-likeFill">
+											<span>${videos[i].dianzan}</span>
+										</div>
+										<div class="iconfont icon-star">
+											<span>${videos[i].shoucang}</span>
+										</div>
+										<div class="iconfont icon-zhibo-">
+											<span>${videos[i].guankan}</span>
+										</div>
+									</div>
+								</div>`;
+					}
+					$(".sets>div").html(homes);
+//点击播放当前视频
+					$(".sets").on("click",".videos",function(){
+						console.log($(this).index());
+						var ids=$(this).data("ids");
+						console.log(ids);
+					})
+					
+				}else if(data.status==321){
 					window.location.href="../login/login.html";
 				}
 			},function(err){
 				console.log(err);
-			})
+			})*/
+			$.ajax({
+				type:"get",
+				url:"./json/home.json",
+				dataType : "json",
+				success: function(data) {
+					var videos=data.videos;
+					var homes="";
+					for(i in videos){
+						homes+=`<div class="videos" data-ids=${videos[i].id}>
+									<img src=${videos[i].v01} alt="" />
+									<div>
+										<div>
+											<div>
+												<img src=${videos[i].imgages} alt="" />
+											</div>
+											<div>${videos[i].name}</div>
+										</div>
+										<div>关注</div>
+									</div>
+									<div>
+										<div class="iconfont icon-pinglun1">
+											<span>${videos[i].pinglun}</span>
+										</div>
+										<div class="iconfont icon-z-likeFill">
+											<span>${videos[i].dianzan}</span>
+										</div>
+										<div class="iconfont icon-star">
+											<span>${videos[i].shoucang}</span>
+										</div>
+										<div class="iconfont icon-zhibo-">
+											<span>${videos[i].guankan}</span>
+										</div>
+									</div>
+								</div>`;
+					}
+					$(".sets>div").html(homes);
+//点击播放当前视频
+					$(".sets").on("click",".videos",function(){
+						console.log($(this).index());
+						var ids=$(this).data("ids");
+						console.log(ids);
+					})
+				},error: function(error) {
+		            console.log(error);         
+		        }
+			});
 		},function(err){
 			console.log(err);
 		})

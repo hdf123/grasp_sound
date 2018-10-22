@@ -42,26 +42,13 @@
 					<div class="el-upload-list" id="videoName">
 						<input type="text" value=""/>
 					</div>
-					<!--<ul class="el-upload-list el-upload-list--text" style="display:  none;">
-						<li tabindex="0" class="el-upload-list__item is-success" style="border:1px solid #eeeeee;">
-							<a class="el-upload-list__item-name">
-								<i class="el-icon-document"></i><span id="videoName">food.jpeg</span>
-							</a>
-							<label class="el-upload-list__item-status-label">
-					            <i class="el-icon-upload-success el-icon-circle-check" ></i>
-					        </label>
-							<i class="el-icon-close" onclick="del();"></i>
-							<i class="el-icon-close-tip"></i>
-						</li>
-					</ul>-->
 					<!--上传速度显示-->
 					<div id="time"></div>
 					<!--进度条-->
 					<div class="el-progress el-progress--line" style="display: none;">
 						<div class="el-progress-bar">
-							<div class="el-progress-bar__outer" style="height: 6px;">
-								<div class="el-progress-bar__inner" style="width: 0%;">
-								</div>
+							<div class="el-progress-bar__outer" style="height:0.6rem;">
+								<div class="el-progress-bar__inner" style="width: 0%;"></div>
 							</div>
 						</div>
 						<div class="el-progress__text" style="font-size: 14.4px;">0%</div>
@@ -73,27 +60,17 @@
 		</section>
 <script type="text/javascript">
 	var _token = JSON.parse(localStorage.getItem('TT_TOKEN'));
-	var xhr,ot,oloaded; //异步请求对象、时间、大小
+	var xhr,ot,oloaded,objUrl,base; //异步请求对象、时间、大小,base64
 //视频封面
     $(".imgFile").change(function () {//书房
-       var index=$(this).parent().parent().index();
         //调用函数调取图片地址
-        var objUrl=this.files;
-        for (var i = 0; i < objUrl.length; i++){
-            var reader = new FileReader();
-            reader.readAsDataURL(objUrl[i]);
-            reader.onload = function(e){
-             	var base=this.result;
-             	var dataObj={
-             		token:userid.token,
-             		base64:base,
-             	}
-				ajaxGet("base64/upload",'post',dataObj,function(data){
-					$('.sd>div').eq(index).find("img").attr("src",data.data);
-				},function(err){
-					console.log(err);
-				})
-            }
+        objUrl=this.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(objUrl);
+        reader.onload = function(e){
+         	var base=this.result;
+         	$('.sd').find("img").attr("src",base);
+         	$('.sd>label').css({"box-shadow":"0rem 0rem 0.3rem 0.3rem rgba(54,224,214,0.2)"});
         }
     });
 	//上传文件方法
@@ -123,7 +100,7 @@
 	/*点击提交*/
 	function sub() {
 		var fileObj = document.getElementById("file").files[0]; // js 获取文件对象
-		if(fileObj == undefined || fileObj == "") {
+		if(fileObj == undefined || fileObj == ""||objUrl==""||objUrl==undefined) {
 			return alert("请选择文件");
 		};
 		//      视频大小判断
@@ -133,6 +110,7 @@
 		var url = "http://39.104.127.252:8084/pic/file/upload"; // 接收上传文件的后台地址 
 		var form = new FormData(); // FormData 对象
 		form.append("token", _token); // 文件对象 
+		form.append("imgage", base); // 文件对象 
 		form.append("file", fileObj); // 文件对象 
 
 		xhr = new XMLHttpRequest(); // XMLHttpRequest 对象
@@ -152,8 +130,9 @@
 		if(evt.lengthComputable) {
 			$(".el-progress--line").css("display", "block");
 			/*进度条显示进度*/
-			$(".el-progress-bar__inner").css("width", Math.round(evt.loaded / evt.total * 100) + "%");
-			$(".el-progress__text").html(Math.round(evt.loaded / evt.total * 100) + "%");
+			var bfb=Math.round(evt.loaded / evt.total * 100);
+			$(".el-progress-bar__inner").css({"width":bfb+'%',"height":"100%","background":"red"});
+			$(".el-progress__text").html(bfb + "%");
 		}
 
 		var time = document.getElementById("time");
@@ -186,10 +165,10 @@
 	//上传成功响应
 	function uploadComplete(evt) {
 		//服务端接收完文件返回的结果  注意返回json对象转换为数组
-		if(evt.target.responseText) {
+		if(evt.target.responseText){
 			var data = JSON.parse(evt.target.responseText)
 			alert("上传成功！");
-			window.location.href="home.html"
+//			window.location.href="home.html"
 		} else {
 			alert("上传失败");
 		}

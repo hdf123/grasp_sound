@@ -21,6 +21,8 @@ body {
   height: 4.15rem;
   margin: 1rem auto 0;
   background-color: rgba(81, 85, 97, 0.5);
+  border-radius: 0.2rem;
+  overflow: hidden;
 }
 .registered > div:nth-child(2) > div > input {
   width: 100%;
@@ -43,6 +45,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 0.2rem;
+  overflow: hidden;
 }
 
 .posra {
