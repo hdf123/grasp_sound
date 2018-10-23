@@ -88,7 +88,7 @@
         var reader = new FileReader();
         reader.readAsDataURL(objUrl);
         reader.onload = function(e){
-         	var base=this.result;
+         	base=this.result;
          	$('.sd').find("img").attr("src",base);
          	$('.sd>label').css({"box-shadow":"0rem 0rem 0.3rem 0.3rem rgba(54,224,214,0.2)"});
         }
@@ -119,7 +119,13 @@
 	}
 	/*点击提交*/
 	function sub() {
+		console.log(user.token);
+		console.log(user.user.userid);
+		console.log(base);
+		console.log($("#selects option:selected").val());
+		console.log($("#form_article").html());
 		var fileObj = document.getElementById("file").files[0]; // js 获取文件对象
+		console.log(fileObj);
 		if(fileObj == undefined || fileObj == ""||objUrl==""||objUrl==undefined) {
 			return alert("请选择文件");
 		};
@@ -128,10 +134,14 @@
 			return alert("文件过大,请重新选择文件");
 		}
 		var url = "http://39.104.127.252:8084/pic/file/upload"; // 接收上传文件的后台地址 
+//		var url = "http://39.104.127.252:8084/app/my/add/small/video"; // 接收上传文件的后台地址 
 		var form = new FormData(); // FormData 对象
-		form.append("token", _token); // 文件对象 
-		form.append("imgage", base); // 文件对象 
-		form.append("file", fileObj); // 文件对象 
+		form.append("token",user.token); 
+		form.append("picture",base); //视频图片
+		form.append("userid",user.user.userid); //发布者id
+		form.append("categoryId",$("#selects option:selected").val()); //分类
+		form.append("descriptions",$("#form_article").html()); //视频描述
+		form.append("video", fileObj); //视频 
 
 		xhr = new XMLHttpRequest(); // XMLHttpRequest 对象
 		xhr.open("post", url, true); //post方式，url为服务器请求地址，true 该参数规定请求是否异步处理。
@@ -151,7 +161,7 @@
 			$(".el-progress--line").css("display", "block");
 			/*进度条显示进度*/
 			var bfb=Math.round(evt.loaded / evt.total * 100);
-			$(".el-progress-bar__inner").css({"width":bfb+'%',"height":"100%","background":"red"});
+			$(".el-progress-bar__inner").css({"width":bfb+'%',"height":"100%","background":"#5CC0BE"});
 			$(".el-progress__text").html(bfb + "%");
 		}
 

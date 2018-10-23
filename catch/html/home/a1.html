@@ -13,29 +13,54 @@
 		margin:0;
 		padding:0;
 	}
+	.swiper-container{
+		overflow: visible;
+	}
+	#swiper1{
+		position: relative;
+	}
 	.swiper-slide{
 		height:11rem;
 		text-align: center;
 		border:1px solid red;
 	}
+	.swiper-container-horizontal>.swiper-pagination-bullets{
+		border:1px solid lime;
+		position:absolute;
+		bottom:-2rem;
+		left:0;
+	}
+	.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet{
+		margin:0;
+	}
+	.swiper-pagination-bullet{
+		width:33%;
+		height:2rem;
+		color:white;
+		border-radius:0;
+		line-height:2rem;
+	}
 </style>
 	<body>
-		<div class="swiper-container">
+		<div class="swiper-container" id="swiper1">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide">slider1</div>
 				<div class="swiper-slide">slider2</div>
 				<div class="swiper-slide">slider3</div>
 			</div>
+			<div class="swiper-pagination"></div>
 		</div>
 		<script>
+			var arr=["1号","2号","3号"]
+			
 			var mySwiper = new Swiper('.swiper-container', {
-				autoplay: true, //可选选项，自动滑动
+				autoplay:false, //可选选项，自动滑动
 			  	pagination: {
 			        el: '.swiper-pagination',
 			        clickable: true,
-			        renderBullet: function (index, className) {
-			          return '<span class="' + className + '">' + (index + 1) + '</span>';
-			        },
+			        renderBullet:function(index, className){
+			          return '<span class="' + className + '">' +arr[index]+ '</span>';
+			        }
 			  	}
 			})
 		</script>

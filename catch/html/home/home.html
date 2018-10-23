@@ -78,7 +78,11 @@
 			if(data.status==321){
 				window.location.href="../login/login.html";
 			}
-			localStorage.setItem('user', JSON.stringify(data.data));
+			var personal={
+				token:_token,
+				user:data.data
+			}
+			localStorage.setItem('user', JSON.stringify(personal));
 //首页推荐
 			/*var parameter={
 				token:_token,
