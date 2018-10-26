@@ -78,8 +78,13 @@ html, body {
                 }
             }
             >div:nth-child(2){
+                width:6rem;
+                height:2rem;
                 font:$fonta;
                 margin-left:0.3rem;
+                overflow: hidden;
+                text-overflow:ellipsis;
+                white-space: nowrap;
             }
         }
         >div:nth-child(2){

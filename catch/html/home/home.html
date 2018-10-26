@@ -84,7 +84,7 @@
 			}
 			localStorage.setItem('user', JSON.stringify(personal));
 //首页推荐
-			/*var parameter={
+			var parameter={
 				token:_token,
 				page:1,
 				size:5,
@@ -92,17 +92,30 @@
 			}
 			ajaxsd("homepage/video/recommended",'post',parameter,function(data){
 				console.log(data);
+				if(data.status==321){
+					window.location.href="../login/login.html";
+				}
 				if(data.status==200){
 					var homes="";
+					var videos=data.data;
 					for(i in videos){
-						homes+=`<div class="videos" data-ids=${videos[i].id}>
-									<img src=${videos[i].v01} alt="" />
+						if(videos[i].userInfo.视频发布者的昵称==null){
+							videos[i].userInfo.视频发布者的昵称="小明小明小明";
+						}
+						if(videos[i].pinglun==undefined){
+							videos[i].pinglun=0;
+						}
+						if(videos[i].guankan==undefined){
+							videos[i].guankan=0;
+						}
+						homes+=`<div class="videos" data-ids=${videos[i].video.userid} data-vids=${videos[i].video.videoId}>
+									<img src=${videos[i].video.picture} alt="" />
 									<div>
 										<div>
 											<div>
-												<img src=${videos[i].imgages} alt="" />
+												<img src=${videos[i].userInfo.视频发布者的头像} alt="" />
 											</div>
-											<div>${videos[i].name}</div>
+											<div>${videos[i].userInfo.视频发布者的昵称}</div>
 										</div>
 										<div>关注</div>
 									</div>
@@ -110,11 +123,11 @@
 										<div class="iconfont icon-pinglun1">
 											<span>${videos[i].pinglun}</span>
 										</div>
-										<div class="iconfont icon-z-likeFill">
-											<span>${videos[i].dianzan}</span>
+										<div class="iconfont icon-z-likeFill" data-dianz=${videos[i].love.是否点赞}>
+											<span>${videos[i].love.点赞总数}</span>
 										</div>
-										<div class="iconfont icon-star">
-											<span>${videos[i].shoucang}</span>
+										<div class="iconfont icon-star" data-scs=${videos[i].collections.是否收藏}>
+											<span>${videos[i].collections.收藏总数}</span>
 										</div>
 										<div class="iconfont icon-zhibo-">
 											<span>${videos[i].guankan}</span>
@@ -135,8 +148,8 @@
 				}
 			},function(err){
 				console.log(err);
-			})*/
-			$.ajax({
+			})
+			/*$.ajax({
 				type:"get",
 				url:"./json/home.json",
 				dataType : "json",
@@ -181,7 +194,7 @@
 				},error: function(error) {
 		            console.log(error);         
 		        }
-			});
+			});*/
 		},function(err){
 			console.log(err);
 		})

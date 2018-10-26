@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>a1</title>
+    <link rel="stylesheet" type="text/css" href="../../css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/iconfont.css"/>
+    <script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/ajaxs.js" type="text/javascript" charset="utf-8"></script>
+<style>
+    html,body{
+    	width:100%;
+    	height:100%;
+        background-image: linear-gradient(265deg,#084869 0%,#0C6B80 100%);
+    }
+    #advert{
+        width:31.2rem;
+        height:31.2rem;
+        margin:20% auto;
+        position: relative;
+       	border:1px solid #235D7B;
+       	border-radius:50%;
+    }
+    .bg1{
+        width:80%;
+        height:80%;
+        position: absolute;
+        top:10%;
+        left:10%;
+        z-index: 10;
+    }
+    .bg1>div {
+        width:100%;
+        height:100%;
+        border: #6D9AAF 1px solid;
+        border-radius:50%;
+        position: relative;
+       	-webkit-animation: animtran 16s linear infinite;
+        -moz-animation: animtran 16s linear infinite;
+        -ms-animation: animtran 16s linear infinite;
+        -o-animation: animtran 16s linear infinite;
+        animation: animtran 16s linear infinite;
+    }
+    .bg1 img {
+        position: absolute;
+        -webkit-animation: animtrans 16s linear infinite;
+        -moz-animation: animtrans 16s linear infinite;
+        -ms-animation: animtrans 16s linear infinite;
+        -o-animation: animtrans 16s linear infinite;
+        animation: animtrans 16s linear infinite;
+    }
+    .icon01 {
+        bottom:3.5rem;
+        left:0.8rem;
+    }
+    .icon02 {
+        top:-1.3rem;
+        right:13rem;
+    }
+    .icon03 {
+        bottom:5.6rem;
+        left:22rem;
+    }
+    .bg2{
+        width:55%;
+        height:55%;
+        position:absolute;
+        top:22.5%;
+        left:22.5%;
+        z-index: 9;
+    }
+    .bg2>div{
+        width:100%;
+        height:100%;
+        border: #9CBCC9 1px solid;
+        border-radius:50%;
+        position: relative;
+        -webkit-animation: animtrans 12s linear infinite;
+        -moz-animation: animtrans 12s linear infinite;
+        -ms-animation: animtrans 12s linear infinite;
+        -o-animation: animtrans 12s linear infinite;
+        animation: animtrans 12s linear infinite;
+    }
+    .bg2>div>div{
+        overflow: hidden;
+        -webkit-animation: animtran 12s linear infinite;
+        -moz-animation: animtran 12s linear infinite;
+        -ms-animation: animtran 12s linear infinite;
+        -o-animation: animtran 12s linear infinite;
+        animation: animtran 12s linear infinite;
+    }
+    .bg1>div>div,.bg2>div>div{
+    	width:3.5rem;
+    	height:3.5rem;
+    	position: absolute;
+    	border-radius:50%;
+    	background-color: rgba(58,113,140,0.9);
+    	display: flex;
+    	align-items: center;
+    	justify-content: center;
+    }
+    .icon08 {
+        top:1.5rem;
+        left:0.5rem;
+    }
+    .icon09 {
+        bottom:-1rem;
+        left:5rem;
+    }
+    .icon10 {
+        bottom:85px;
+        right: -15px;
+    }
+	.bg1 img,.bg2 img{
+		width:60%;
+		height:60%;
+	}
+	.bg3{
+		width:30%;
+		height:30%;
+		border:1px solid #F1F5F7;
+		position: absolute;
+        top:35%;
+        left:35%;
+        border-radius:50%;
+	}
+	.bg3>div{
+		width: 4.666rem;
+		height: 4.582rem;
+		margin:20% auto;
+		display:flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.bg3>div>img{
+		width:80%;
+		height:80%;
+	}
+    @-webkit-keyframes animtran {
+        from {
+            transform: rotateZ(0deg);
+        }
+        to {
+            transform: rotateZ(360deg);
+        }
+    }
+
+    @-webkit-keyframes animtrans {
+        from {
+            transform: rotateZ(360deg);
+        }
+        to {
+            transform: rotateZ(0deg);
+        }
+    }
+    @-moz-keyframes animtran {
+        from {
+            transform: rotateZ(0deg);
+        }
+        to {
+            transform: rotateZ(360deg);
+        }
+    }
+
+    @-moz-keyframes animtrans {
+        from {
+            transform: rotateZ(360deg);
+        }
+        to {
+            transform: rotateZ(0deg);
+        }
+    }
+    @-ms-keyframes animtran {
+        from {
+            transform: rotateZ(0deg);
+        }
+        to {
+            transform: rotateZ(360deg);
+        }
+    }
+
+    @-ms-keyframes animtrans {
+        from {
+            transform: rotateZ(360deg);
+        }
+        to {
+            transform: rotateZ(0deg);
+        }
+    }
+    @-o-keyframes animtran {
+        from {
+            transform: rotateZ(0deg);
+        }
+        to {
+            transform: rotateZ(360deg);
+        }
+    }
+
+    @-o-keyframes animtrans {
+        from {
+            transform: rotateZ(360deg);
+        }
+        to {
+            transform: rotateZ(0deg);
+        }
+    }
+    @keyframes animtran {
+        from {
+            transform: rotateZ(0deg);
+        }
+        to {
+            transform: rotateZ(360deg);
+        }
+    }
+    @keyframes animtrans {
+        from {
+            transform: rotateZ(360deg);
+        }
+        to {
+            transform: rotateZ(0deg);
+        }
+    }
+</style>
+</head>
+
+<body>
+    <div id="advert">
+        <div class="bg1">
+            <div>
+            	<div class="icon01">
+            		<img src="../../img/start_01.png" alt="" />
+            	</div>
+            	<div class="icon02">
+            		<img src="../../img/start_02.png" alt="" />
+            	</div>
+            	<div class="icon03">
+            		<img src="../../img/start_03.png" alt="" />
+            	</div>
+            </div>
+        </div>
+        <div class="bg2">
+            <div>
+                <div class="icon08">
+                    <img src="../../img/start_04.png" alt="" />
+                </div>
+                <div class="icon09">
+                    <img src="../../img/start_05.png" alt="" />
+                </div>
+                <div class="icon10">
+                    <img src="../../img/start_06.png" alt="" />
+                </div>
+            </div>
+        </div>
+        <div class="bg3">
+        	<div>
+        		<img src="../../img/start_07.png" alt="" />
+        	</div>
+        </div>
+    </div>
+</body>
+
+<script>
+</script>
+
+</html>

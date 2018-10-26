@@ -1,0 +1,115 @@
+@import "../../../css/style.scss";
+.sets{
+    top:3.5rem;
+    bottom:0;
+    overflow: auto;
+    >div{
+        width:100%;
+        >.asd{
+            width:80%;
+            height:3rem;
+            display: flex;
+//          background:#1ADBD0;
+            margin:1rem auto;
+            border-bottom:1px solid #d2d2d2;
+            >div{
+                height:100%;
+                font:$fontc;
+                display:flex;
+                align-items: center;
+                padding:0 0.5rem 0 0.6rem;
+            }
+            >input{
+                width:70%;
+                height:100%;
+//              border:1px solid #eeeeee;
+                padding:0 0.5rem;
+            }
+        }
+    }
+}
+#hair{
+    width:80%;
+    height:100%;
+    display: flex;
+    >label{
+        width:4.5rem;
+        height:100%;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+//      background-color: #ffffff;
+        overflow: hidden;
+        color:#333;
+        font-size: 0.64rem;
+    }
+    >label:nth-child(2){
+        margin-left:1rem;
+    }
+    >label:nth-child(3){
+        margin-left:1rem;
+    }
+}
+.m-cell{
+    width:80%;
+    height:3rem;
+    line-height:3rem;
+    margin:1rem auto;
+    border-bottom:1px solid #d2d2d2;
+    #J_Address{
+        height:100%;
+    }
+    >.cell-item{
+        width:100%;
+        height:100%;
+        display: flex;
+        align-items: center;
+        >div{
+            height:100%;
+            font:$fontc;
+            display: flex;
+            align-items: center;
+            padding:0 0.2rem 0 0.6rem;
+        }
+        >input{
+            padding:0 0.3rem;
+        }
+    }
+}
+.detaileds{
+  width: 100%;
+  font-size:1.4rem;
+  padding: 0.2rem 0.1rem;
+  border: none;
+}
+.detaileds::-webkit-input-placeholder{
+    font-size:0.55rem;
+}
+.ffs{
+    width:80%;
+    height:7rem;
+    padding:0.2rem 0.5rem ;
+    margin:1rem auto;
+    display: flex;
+    border-bottom:1px solid #d2d2d2;
+    >div:nth-child(1){
+        width:20%;
+        >span{
+            font:$fontc;
+        }
+    }
+    >div:nth-child(2){
+        
+    }
+}
+#save{
+    display: flex;
+    justify-content: center;
+    margin:4rem auto 0;
+    >div{
+        font:$fontb;
+        padding:0.5rem 5rem;
+        border: solid 0.083rem #0182cc;
+        border-radius:1.5rem;
+    }
+}

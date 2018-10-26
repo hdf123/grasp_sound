@@ -2,8 +2,8 @@
 .headers{
     width: 100%;
     position: absolute;
-    top: 0;
-    left: 0;
+    top:0;
+    left:0;
     display: flex;
     color: #ffffff;
     background:#5cc0be;
@@ -13,7 +13,7 @@
     }
     > div:nth-child(1){
         width: 3rem;
-        position: absolute;
+        position:absolute;
         top: 0;
         left: 0;
         display: flex;

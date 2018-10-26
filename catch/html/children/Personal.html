@@ -4,11 +4,15 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>个人信息</title>
+		<link rel="stylesheet" href="../../css/ydui.css">
+		<link rel="stylesheet" href="../../css/demo.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<link rel="stylesheet" href="../../css/base.css" />
 		<link rel="stylesheet" href="../../css/iconfont.css" />
 		<link rel="stylesheet" href="../../css/layout.css" />
-		<link rel="stylesheet" href="css/setThe.css" />
-		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="css/Personal.css" />
+		<script type="text/javascript" src="scripts/jquery-1.8.2.min.js"></script>
+		<script src="../../js/ydui.flexible.js"></script>
 		<script src="../../js/ajaxs.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
@@ -16,15 +20,138 @@
 			<div class="iconfont icon-houtui" onclick="javascript:history.back(-1);"></div>
 			<div>设置</div>
 		</header>
-		<section>
+		<section class="sets">
 			<div>
-				<div>
-					<div>
-						<div>昵称</div>
-						<div>昵称</div>
+				<div class="name asd">
+					<div>昵称:</div>
+					<input type="text" />
+				</div>
+		        <div class="asd">
+	                <div>性别:</div>
+				  	<form action="" id="hair">
+				  		<label><input type ="radio" name = "fruit" value ="男" checked>男</label>
+				  		<label><input type ="radio" name = "fruit" value ="女">女</label>
+				  		<label><input type ="radio" name = "fruit" value ="其它">其它</label>
+				  	</form>
+		        </div>
+		       <div class="m-cell">
+		            <div class="cell-item">
+		                <div class="fons">所在地区:</div>
+		                <input type="text" class="cell-input" readonly id="J_Address" placeholder="请选择收货地址">
+		            </div>
+		        </div>
+		        <div class="asd">
+	                <div>详细地址:</div>
+	                <input type="text" class="detaileds" placeholder="如道路、门牌号、小区等" value="" >
+		        </div>
+		        <div class="asd">
+	                <div>个人说明:</div>
+	                <input type="text" class="instructions" placeholder="" value="" >
+		        </div>
+		        <div class="ffs">
+		            <div>
+		                <span>头像:</span>
+		            </div>
+					<div class="logo-license">
+						<div class="half">
+							<a class="logo" id="logox">
+								<img src="../../img/add.png"/>
+							</a>
+						</div>
+						<div class="clear"></div>
 					</div>
+					<article class="htmleaf-container">
+						<div id="clipArea"></div>
+						<div class="foot-use">
+							<div class="uploader1 blue">
+								<input type="button" name="file" class="button" value="打开">
+								<input id="file" type="file" accept="image/*" multiple  />
+							</div>
+							<button id="clipBtn">截取</button>
+						</div>
+						<div id="view"></div>
+					</article>    
+		        </div>
+				<div id="save">
+					<div>保存</div>
 				</div>
 			</div>
 		</section>
+<script type="text/javascript" src="../../js/ydui.citys.js"></script>
+<script type="text/javascript" src="../../js/ydui.js"></script>
+<script src="scripts/iscroll-zoom.js"></script>
+<script src="scripts/hammer.js"></script>
+<script src="scripts/jquery.photoClip.js"></script>
+<script type="text/javascript">
+	!function () {
+		var $target = $('#J_Address');
+		$target.citySelect();
+		$target.on('click', function (event) {
+			event.stopPropagation();
+			$target.citySelect('open');
+		});
+		$target.on('done.ydui.cityselect', function (ret) {
+			$(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
+		});
+	}();
+	$(function(){
+		var image="";
+		var user = JSON.parse(localStorage.getItem('user'));
+//头像
+	$("#clipArea").photoClip({
+		width: 300,
+		height: 300,
+		file: "#file",
+		view: "#view",
+		ok: "#clipBtn",
+		loadStart: function() {
+			console.log("照片读取中");
+		},
+		loadComplete: function() {
+			console.log("照片读取完成");
+		},
+		clipFinish: function(dataURL){
+			console.log(dataURL);
+		}
+	});
+	$("#logox").click(function(){
+		$(".htmleaf-container").show();
+	})
+	$("#clipBtn").click(function(){
+		$("#logox").empty();
+		ajaxsd( "pic/base64/upload",'post',{base64:imgsource,token:user.token},function(data){
+			if(data.status==985){
+				window.location.href="../login/login.html";
+			}
+			$('#logox').append('<img src="' + data.data + '" align="absmiddle" style=" width:100%;height:100%;">');
+		},function(err){
+			console.log(err);
+		})
+		$(".htmleaf-container").hide();
+	})
+		
+		
+		
+		
+		$("#save>div").click(function(){
+		 	image=$('#logox>img').attr("src");//头像
+			var sds=$("#J_Address").val()+" "+$(".detaileds").val();
+			var parameter={
+				token:user.token,
+				userid:user.user.userid,
+				portrait:image,	//头像
+				nickname:$(".name>input").val(),	//昵称
+				address:sds,	//地址
+				gender:$('#hair input[name="fruit"]:checked').val(),	//性别
+				signature:$(".instructions").val()	//个人说明
+			}
+			ajaxsd("user/modify/personal",'post',parameter,function(data){
+				console.log(data);
+			},function(err){
+				console.log(err);
+			})
+		})
+	})
+</script>
 	</body>
 </html>

@@ -80,8 +80,13 @@ html, body {
   width: 100%;
 }
 .videos > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) {
+  width: 6rem;
+  height: 2rem;
   font: normal 1.5rem PingFang-SC-Medium;
   margin-left: 0.3rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .videos > div:nth-child(2) > div:nth-child(2) {
   font: normal 1.5rem PingFang-SC-Medium;
