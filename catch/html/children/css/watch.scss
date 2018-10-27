@@ -1,0 +1,23 @@
+@import "../../../css/style.scss";
+body{
+    position: relative;
+    background:#000000;
+//  background:#d2d2d2;
+//  background:#eeeee;
+}
+.uus{
+    position: absolute;
+    bottom:6rem;
+    right:0;
+    list-style:none;
+    >li{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        color:#d2d2d2;
+        font-size:3rem;
+        >span{
+            font:$fontc;
+        }
+    }
+}

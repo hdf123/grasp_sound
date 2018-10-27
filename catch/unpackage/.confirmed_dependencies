@@ -1,9 +1,23 @@
 {
-	"index.html": {
-		"refer": [
-			"html/login/a1.html",
-			"html/login/a2.html",
-			"html/login/a3.html"
-		]
-	}
+  "index.html": {
+    "refer": [
+      "html/login/a1.html",
+      "html/login/a2.html",
+      "html/login/a3.html",
+      "html/login/login.html"
+    ],
+    "resources": []
+  },
+  "html/home/home.html": {
+    "refer": [
+      "html/home/aa.html",
+      "html/children/play.html"
+    ],
+    "resources": []
+  },
+  "html/children/play.html": {
+    "refer": [
+      "html/home/home.html"
+    ]
+  }
 }

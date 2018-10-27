@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="css/home.css" />
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/ajaxs.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 <style>
 	
@@ -92,23 +93,17 @@
 			}
 			ajaxsd("homepage/video/recommended",'post',parameter,function(data){
 				console.log(data);
-				if(data.status==321){
-					window.location.href="../login/login.html";
-				}
 				if(data.status==200){
 					var homes="";
 					var videos=data.data;
 					for(i in videos){
-						if(videos[i].userInfo.视频发布者的昵称==null){
-							videos[i].userInfo.视频发布者的昵称="小明小明小明";
-						}
 						if(videos[i].pinglun==undefined){
 							videos[i].pinglun=0;
 						}
 						if(videos[i].guankan==undefined){
 							videos[i].guankan=0;
 						}
-						homes+=`<div class="videos" data-ids=${videos[i].video.userid} data-vids=${videos[i].video.videoId}>
+						homes+=`<div class="videos" data-usids=${videos[i].video.userid} data-vids=${videos[i].video.videoId} data-videos=${videos[i].video.video}>
 									<img src=${videos[i].video.picture} alt="" />
 									<div>
 										<div>
@@ -138,69 +133,29 @@
 					$(".sets>div").html(homes);
 //点击播放当前视频
 					$(".sets").on("click",".videos",function(){
-						console.log($(this).index());
-						var ids=$(this).data("ids");
-						console.log(ids);
+						var usids=$(this).data("usids");//视频账号id
+						var vids=$(this).data("vids");//视频id
+						var videos=$(this).data("videos");//视频地址
+						console.log(usids+"---"+vids);
+						window.location.href="../children/watch.html?usids="+usids+"&vids="+vids+"&videos="+videos;
+//						window.location.href="../children/aa.html?usids="+usids+"&vids="+vids+"&videos="+videos;
+						
+						/*var videos=[usids,vids,videos]
+						window.location.href="aa.html?videos="+videos;*/
+						
 					})
-					
 				}else if(data.status==321){
 					window.location.href="../login/login.html";
 				}
 			},function(err){
 				console.log(err);
 			})
-			/*$.ajax({
-				type:"get",
-				url:"./json/home.json",
-				dataType : "json",
-				success: function(data) {
-					var videos=data.videos;
-					var homes="";
-					for(i in videos){
-						homes+=`<div class="videos" data-ids=${videos[i].id}>
-									<img src=${videos[i].v01} alt="" />
-									<div>
-										<div>
-											<div>
-												<img src=${videos[i].imgages} alt="" />
-											</div>
-											<div>${videos[i].name}</div>
-										</div>
-										<div>关注</div>
-									</div>
-									<div>
-										<div class="iconfont icon-pinglun1">
-											<span>${videos[i].pinglun}</span>
-										</div>
-										<div class="iconfont icon-z-likeFill">
-											<span>${videos[i].dianzan}</span>
-										</div>
-										<div class="iconfont icon-star">
-											<span>${videos[i].shoucang}</span>
-										</div>
-										<div class="iconfont icon-zhibo-">
-											<span>${videos[i].guankan}</span>
-										</div>
-									</div>
-								</div>`;
-					}
-					$(".sets>div").html(homes);
-//点击播放当前视频
-					$(".sets").on("click",".videos",function(){
-						console.log($(this).index());
-						var ids=$(this).data("ids");
-						console.log(ids);
-					})
-				},error: function(error) {
-		            console.log(error);         
-		        }
-			});*/
 		},function(err){
 			console.log(err);
 		})
 //上传视频
 		$("#upvideo").click(function(){
-			window.location.href="releases.html";
+			window.location.href="../children/releases.html";
 		})
 	})
 </script>

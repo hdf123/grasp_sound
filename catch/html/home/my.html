@@ -12,6 +12,7 @@
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/ajaxs.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="../../js/swiper-4.3.3.min.js"></script>
+		<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<header>
@@ -60,6 +61,11 @@
 						<img src="../../img/home_02.jpg" alt="" />
 					</div>
 				</div>
+				<div class="videoks">
+					<div>
+						<img src="../../img/home_02.jpg" alt="" />
+					</div>
+				</div>
 			</div>
 			<div>
 				<div>
@@ -68,7 +74,7 @@
 							<img src="../../img/home_03.png" alt="" />
 						</div>
 						<div>那些年</div>
-						<div>爱心</div>
+						<div class="icon iconfont icon-dianzan1"></div>
 					</div>
 				</div>
 				<div>
@@ -77,7 +83,16 @@
 							<img src="../../img/home_03.png" alt="" />
 						</div>
 						<div>那些年</div>
-						<div>爱心</div>
+						<div class="icon iconfont icon-dianzan1"></div>
+					</div>
+				</div>
+				<div>
+					<div>
+						<div>
+							<img src="../../img/home_03.png" alt="" />
+						</div>
+						<div>那些年</div>
+						<div class="icon iconfont icon-dianzan1"></div>
 					</div>
 				</div>
 			</div>
@@ -101,6 +116,7 @@
 		</footer>
 <script type="text/javascript">
 	$(function(){
+		var user = JSON.parse(localStorage.getItem('user'));
 		$(".sets>div").hide();
 		$(".sets>div:eq(0)").show();
 		$(".taba>div").click(function(){
@@ -112,13 +128,34 @@
 			});
 			$(".sets>div").eq(index).show().siblings().hide();
 		})
+//我的视频
+		var parameter={
+			token:user.token,
+			userId:user.user.userid,
+			page:1,
+			size:5
+		}
+		ajaxsd("app/my/videos",'post',parameter,function(data){
+			console.log(data);
+			var videos=data.data,ks="";
+			for(i in videos){
+				ks+=`<div class="videoks" data-usids=${videos[i].video.userid} data-vids=${videos[i].video.videoId} data-videos=${videos[i].video.video}>
+						<div>
+							<img src=${videos[i].video.picture} alt="" />
+						</div>
+					</div>`;
+			}
+//			$(".sets>div:eq(0)").html(ks);
+		},function(err){
+			console.log(err);
+		})
 //设置
 		$(".icon-shezhi").click(function(){
-			window.location.href="setThe.html";
+			window.location.href="../children/setThe.html";
 		})
 //上传视频
 		$("#upvideo").click(function(){
-			window.location.href="releases.html";
+			window.location.href="../children/releases.html";
 		})
 		
 		

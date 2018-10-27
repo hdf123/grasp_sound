@@ -12,6 +12,7 @@
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/ajaxs.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="../../js/swiper-4.3.3.min.js"></script>
+		<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<div class="swiper-container" id="swiper1">
@@ -29,26 +30,6 @@
 		        <div class="swiper-slide">
 		        	<div>
 		        		分类2
-		        	</div>
-		        </div>
-		        <div class="swiper-slide">
-		        	<div>
-		        		分类3
-		        	</div>
-		        </div>
-		        <div class="swiper-slide">
-		        	<div>
-		        		分类4
-		        	</div>
-		        </div>
-		        <div class="swiper-slide">
-		        	<div>
-		        		分类5
-		        	</div>
-		        </div>
-		        <div class="swiper-slide">
-		        	<div>
-		        		分类6
 		        	</div>
 		        </div>
 		    </div>
@@ -129,17 +110,86 @@
 		
 <script type="text/javascript">
 	$(function(){
-		var mySwiper1 = new Swiper ('#swiper1',{//推荐recommend
-		    slidesPerView:5
+		var user = JSON.parse(localStorage.getItem('user'));
+		ajaxsd("small/video/category",'get',{token:user.token},function(data){
+			console.log(data);
+			var fl="",data=data.data;
+			for(let i=0;i<data.length;i++){
+				fl+=`<div class="swiper-slide" data-catid=${data[i].catId}>
+			        	<div>${data[i].category}</div>
+			        </div>`;
+			}
+			$("#swiper1>div").html(fl);
+			var mySwiper1 = new Swiper ('#swiper1',{
+			    slidesPerView:4
+			})
+			
+		},function(err){
+			console.log(err);
+		})
+		var parameter={
+			token:user.token,
+			page:1,//第几页
+			size:5,//每页多少
+			userId:user.user.userid,
+			categoryId:2,//视频分类id
+		}
+		ajaxsd("small/video/getBy/category",'get',parameter,function(data){
+			console.log(data);
+			if(data.status==200){
+				var homes="";
+				var videos=data.data;
+				for(i in videos){
+					if(videos[i].userInfo.视频发布者的昵称==null){
+						videos[i].userInfo.视频发布者的昵称="小明小明小明";
+					}
+					if(videos[i].pinglun==undefined){
+						videos[i].pinglun=0;
+					}
+					if(videos[i].guankan==undefined){
+						videos[i].guankan=0;
+					}
+					homes+=`<div class="videos" data-ids=${videos[i].video.userid} data-vids=${videos[i].video.videoId}>
+								<img src=${videos[i].video.picture} alt="" />
+								<div>
+									<div>
+										<div>
+											<img src=${videos[i].userInfo.视频发布者的头像} alt="" />
+										</div>
+										<div>${videos[i].userInfo.视频发布者的昵称}</div>
+									</div>
+									<div>关注</div>
+								</div>
+								<div>
+									<div class="iconfont icon-pinglun1">
+										<span>${videos[i].pinglun}</span>
+									</div>
+									<div class="iconfont icon-z-likeFill" data-dianz=${videos[i].love.是否点赞}>
+										<span>${videos[i].love.点赞总数}</span>
+									</div>
+									<div class="iconfont icon-star" data-scs=${videos[i].collections.是否收藏}>
+										<span>${videos[i].collections.收藏总数}</span>
+									</div>
+									<div class="iconfont icon-zhibo-">
+										<span>${videos[i].guankan}</span>
+									</div>
+								</div>
+							</div>`;
+				}
+				$(".sets>div").html(homes);
+			}
+			
+		},function(err){
+			console.log(err);
 		})
 //切换类型
 		$("#swiper1 .swiper-slide").click(function(){
-			var index=$(this).index();
+			var index=$(this).data("catid");
 			console.log(index);
 		})
 //上传视频
 		$("#upvideo").click(function(){
-			window.location.href="releases.html";
+			window.location.href="../children/releases.html";
 		})
 	})
 </script>

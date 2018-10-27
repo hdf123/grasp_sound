@@ -12,6 +12,7 @@
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/ajaxs.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="../../js/swiper-4.3.3.min.js"></script>
+		<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<header class="heads">
@@ -103,6 +104,16 @@
 <script type="text/javascript">
 	$(function(){
 		var sd="";
+		var user = JSON.parse(localStorage.getItem('user'));
+		var parameter={
+			token:user.token,
+			accid:"zhuayin"+user.user.userid
+		}
+		ajaxsd("wangyi/im/SingleChat/get/friends",'post',parameter,function(data){
+			console.log(data);
+		},function(err){
+			console.log(err);
+		})
 		for(var i=0;i<10;i++){
 			sd+=`<div>
 					<div>
@@ -135,7 +146,7 @@
 		})
 //上传视频
 		$("#upvideo").click(function(){
-			window.location.href="releases.html";
+			window.location.href="../children/releases.html";
 		})
 		
 	})

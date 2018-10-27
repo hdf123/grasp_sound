@@ -7,6 +7,10 @@
     font-size: 0.21rem;
     font-weight: 400;
 }
+/*html,body{
+	min-width: 320px;
+  	max-width: 640px;
+}*/
 input{
     /*1.清除文本框获取焦点时默认的边框阴影*/
     outline: none;

@@ -20,17 +20,17 @@
 			</div>
 			<div>
 				<div>
-					<input type="text" id="tel" placeholder="手机号码" />
+					<input type="text" id="tel" placeholder="手机号码" value="15137102387"/>
 				</div>
 				<div class="posra">
 					<input type="text" id="yz" placeholder="输入短信验证码" />
 					<div class="verification">获取验证码</div>
 				</div>
 				<div>
-					<input type="password" id="passd" placeholder="设置密码" />
+					<input type="password" id="passd" placeholder="设置密码" value="ad123456"/>
 				</div>
 				<div>
-					<input type="password" id="pass" placeholder="确认密码" />
+					<input type="password" id="pass" placeholder="确认密码" value="ad123456" />
 				</div>
 			</div>
 			<a href="#" id="registered">完成注册</a>
@@ -88,11 +88,10 @@
 //注册 
 		$("#registered").click(function(){
 			$("#pass").val();
-			$("#pass").val()==""||$("#tel").val()==""?alert("密码输入不可为空"):func();
+			$("#pass").val()==""||$("#tel").val()==""?alert("输入不可为空"):func();
 			function func(){
 				var df=/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z_]{8,16}$/;
 				df.test($("#pass").val())?funs():funk();
-				funs();
 				function funs(){
 					$("#passd").val()==$("#pass").val()?funjk():alert("密码输入不一致，请重新输入！");
 				}
@@ -104,6 +103,7 @@
 						code:$("#yz").val()
 					}
 					ajaxsd( "user/register",'post',firs,function(data){
+						console.log(data);
 						if(data.status == 200){
 							$(".wdows").fadeIn(300,function(){
 								setTimeout(function(){
