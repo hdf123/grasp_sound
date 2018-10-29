@@ -106,34 +106,36 @@ header > div:nth-child(2) > div > div:nth-child(1) > div {
   top: 18.5rem;
   bottom: 5rem;
 }
-
-.ask > div {
+.sets > div:nth-child(1) {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.sets > div:nth-child(1) > div {
   width: 33.3333333333%;
   height: 10rem;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  float: left;
 }
-.ask > div > div {
-  width: 85%;
+.sets > div:nth-child(1) > div > div {
+  width: 80%;
   height: 100%;
 }
-.ask > div > div > img {
+.sets > div:nth-child(1) > div > div > img {
   width: 100%;
   height: 100%;
 }
-
-.sdk {
+.sets > div:nth-child(2) {
   width: 100%;
   border-top: 1px solid gainsboro;
 }
-.sdk > div {
+.sets > div:nth-child(2) > div {
   width: 100%;
   border-bottom: 1px solid #eeeeee;
 }
-.sdk > div > div {
+.sets > div:nth-child(2) > div > div {
   width: 90%;
   height: 5rem;
   display: flex;
@@ -141,20 +143,20 @@ header > div:nth-child(2) > div > div:nth-child(1) > div {
   margin: 0 auto;
   position: relative;
 }
-.sdk > div > div > div:nth-child(1) {
+.sets > div:nth-child(2) > div > div > div:nth-child(1) {
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
   overflow: hidden;
 }
-.sdk > div > div > div:nth-child(1) > img {
+.sets > div:nth-child(2) > div > div > div:nth-child(1) > img {
   width: 100%;
   height: 100%;
 }
-.sdk > div > div > div:nth-child(2) {
+.sets > div:nth-child(2) > div > div > div:nth-child(2) {
   margin-left: 0.5rem;
 }
-.sdk > div > div > div:nth-child(3) {
+.sets > div:nth-child(2) > div > div > div:nth-child(3) {
   height: 100%;
   position: absolute;
   top: 0;
@@ -167,4 +169,4 @@ header > div:nth-child(2) > div > div:nth-child(1) > div {
   color: #36e0d6;
 }
 
-/*# sourceMappingURL=my.css.map */
+/*# sourceMappingURL=mys.css.map */

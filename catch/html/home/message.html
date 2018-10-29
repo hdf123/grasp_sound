@@ -111,10 +111,29 @@
 		}
 		ajaxsd("wangyi/im/SingleChat/get/friends",'post',parameter,function(data){
 			console.log(data);
+			var data=data.data;
+			for(i in data){
+				sd+=`<div>
+						<div>
+							<div>
+								<img src=${data[i].icon} alt="" />
+							</div>
+							<div>
+								<div class="name">${data[i].name}</div>
+								<div class="sd">你在干什么</div>
+							</div>
+							<div>
+								<div>2046</div>
+								<div>99+</div>
+							</div>
+						</div>
+					</div>`;
+			}
+			$(".friends").html(sd);
 		},function(err){
 			console.log(err);
 		})
-		for(var i=0;i<10;i++){
+		/*for(var i=0;i<10;i++){
 			sd+=`<div>
 					<div>
 						<div>
@@ -131,7 +150,8 @@
 					</div>
 				</div>`;
 		}
-		$(".friends").html(sd);
+		$(".friends").html(sd);*/
+		
 		$(".icon-guanzhu").click(function(){
 			window.location.href="../children/focus.html"
 		})

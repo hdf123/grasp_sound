@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="../../css/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/swiper-4.3.3.min.css"/>
 		<link rel="stylesheet" href="../../css/layout.css" />
-		<link rel="stylesheet" href="css/my.css" />
+		<link rel="stylesheet" href="css/mys.css" />
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/ajaxs.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="../../js/swiper-4.3.3.min.js"></script>
@@ -44,62 +44,45 @@
 				</div>
 			</div>
 		</header>
-		<div class="swiper-container sets" id="swiper1">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide ask">
-					
-					<div class="videoks">
-						<div>
-							<img src="../../img/home_02.jpg" alt="" />
-						</div>
+		<section class="sets">
+			<div>
+				<div class="videoks">
+					<div>
+						<img src="../../img/home_02.jpg" alt="" />
 					</div>
-					<div class="videoks">
-						<div>
-							<img src="../../img/home_02.jpg" alt="" />
-						</div>
-					</div>
-					<div class="videoks">
-						<div>
-							<img src="../../img/home_02.jpg" alt="" />
-						</div>
-					</div>
-					<div class="videoks">
-						<div>
-							<img src="../../img/home_02.jpg" alt="" />
-						</div>
-					</div>
-					<div class="videoks">
-						<div>
-							<img src="../../img/home_02.jpg" alt="" />
-						</div>
-					</div>
-					
 				</div>
-				<div class="swiper-slide sdk">
-					
+				<div class="videoks">
 					<div>
-						<div>
-							<div>
-								<img src="../../img/home_03.png" alt="" />
-							</div>
-							<div>那些年</div>
-							<div class="icon iconfont icon-dianzan1"></div>
-						</div>
+						<img src="../../img/home_02.jpg" alt="" />
 					</div>
+				</div>
+				<div class="videoks">
 					<div>
-						<div>
-							<div>
-								<img src="../../img/home_03.png" alt="" />
-							</div>
-							<div>那些年</div>
-							<div class="icon iconfont icon-dianzan1"></div>
-						</div>
+						<img src="../../img/home_02.jpg" alt="" />
 					</div>
-					
 				</div>
 			</div>
-			<div class="swiper-pagination"></div>
-		</div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<img src="../../img/home_03.png" alt="" />
+						</div>
+						<div>那些年</div>
+						<div class="icon iconfont icon-dianzan1"></div>
+					</div>
+				</div>
+				<div>
+					<div>
+						<div>
+							<img src="../../img/home_03.png" alt="" />
+						</div>
+						<div>那些年</div>
+						<div class="icon iconfont icon-dianzan1"></div>
+					</div>
+				</div>
+			</div>
+		</section>
 		<footer class="footersd">
 			<a href="./home.html" id="home" class="iconfont icon-shouye">
 				<span>首页</span>
@@ -120,30 +103,17 @@
 <script type="text/javascript">
 	$(function(){
 		var user = JSON.parse(localStorage.getItem('user'));
-		
-		var my=new Swiper("#swiper1",{
-			on:{
-			    slideChangeTransitionStart: function(my){//swiper4中使用
-			      	var xiabiao=this.realIndex;//循环状态下获取下标
-		        	console.log(xiabiao);
-		        	$(".taba>div").eq(xiabiao).children("div").css({
-						"border-bottom":"0.25rem solid #36E0D6"
-					}).parent().siblings().children("div").css({
-						"border":"none"
-					});
-			    },
-			}
-		})
+		$(".sets>div").hide();
+		$(".sets>div:eq(0)").show();
 		$(".taba>div").click(function(){
-		    var index=$(this).index();
-		    $(".taba>div").eq(index).children("div").css({
+			var index=$(this).index();
+			$(".taba>div").eq(index).children("div").css({
 				"border-bottom":"0.25rem solid #36E0D6"
 			}).parent().siblings().children("div").css({
 				"border":"none"
 			});
-		    my.slideTo(index,500,false);
+			$(".sets>div").eq(index).show().siblings().hide();
 		})
-		
 //个人信息
 		var parameter={
 			token:user.token,
@@ -163,7 +133,6 @@
 										<div>${data.gender}</div>
 									</div>`)
 			$(".instructions").html(data.signature);
-			
 		},function(err){
 			console.log(err);
 		})
@@ -184,7 +153,7 @@
 						</div>
 					</div>`;
 			}
-//			$(".ask").html(ks);
+			$(".sets>div:eq(0)").html(ks);
 		},function(err){
 			console.log(err);
 		})

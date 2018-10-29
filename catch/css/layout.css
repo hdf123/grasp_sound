@@ -129,6 +129,7 @@ html, body {
   white-space: nowrap;
 }
 .videos > div:nth-child(2) > div:nth-child(2) {
+  color: #ff2e55;
   font: normal 1.5rem PingFang-SC-Medium;
 }
 .videos > div:nth-child(3) {

@@ -36,7 +36,7 @@
 		</div>
 		<section class="sets">
 			<div>
-				<div class="videos">
+				<!--<div class="videos">
 					<img src="../../img/home_01.png" alt="" />
 					<div>
 						<div>
@@ -61,33 +61,7 @@
 							<span>44</span>
 						</div>
 					</div>
-				</div>
-				<div class="videos">
-					<img src="../../img/home_01.png" alt="" />
-					<div>
-						<div>
-							<div>
-								<img src="../../img/home_03.png" alt="" />
-							</div>
-							<div>小芳</div>
-						</div>
-						<div>关注</div>
-					</div>
-					<div>
-						<div class="iconfont icon-pinglun1">
-							<span>11</span>
-						</div>
-						<div class="iconfont icon-z-likeFill">
-							<span>22</span>
-						</div>
-						<div class="iconfont icon-star">
-							<span>33</span>
-						</div>
-						<div class="iconfont icon-zhibo-">
-							<span>44</span>
-						</div>
-					</div>
-				</div>
+				</div>-->
 			</div>
 		</section>
 		<footer class="footersd">
@@ -111,8 +85,12 @@
 <script type="text/javascript">
 	$(function(){
 		var user = JSON.parse(localStorage.getItem('user'));
+//获取视频分类
 		ajaxsd("small/video/category",'get',{token:user.token},function(data){
-			console.log(data);
+//			console.log(data);
+			if(data.status==985){
+				window.location.href="../login/login.html";
+			}
 			var fl="",data=data.data;
 			for(let i=0;i<data.length;i++){
 				fl+=`<div class="swiper-slide" data-catid=${data[i].catId}>
@@ -123,19 +101,100 @@
 			var mySwiper1 = new Swiper ('#swiper1',{
 			    slidesPerView:4
 			})
+//切换类型
+			$("#swiper1 .swiper-slide").click(function(){
+				var index=$(this).data("catid");
+				console.log(index);
+				localStorage.setItem('typesd',JSON.stringify(index));//视频类型
+				window.location.reload();//重新加载当前页面
+			})
+//根据分来获取视频
+			var typesd = JSON.parse(localStorage.getItem('typesd'));
+			if(typesd==null){
+				typesd=1;
+			}
+			var parameter={
+				token:user.token,
+				page:1,	//第几页
+				size:6,	//每页多少
+				userId:user.user.userid,//用户id
+				categoryId:typesd	//视频分类 ID
+			}
+			ajaxsd("small/video/getBy/category",'post',parameter,function(data){
+				console.log(data);
+				funk(data);
+			},function(err){
+				console.log(err);
+			})
+			
+			
+//上拉加载
+			loadmore($(".sets"),'http://39.104.127.252:8084/small/video/getBy/category','post',parameter,function (data){//上拉加载数据
+				if(data.status==985){
+					window.location.href="../login/login.html";
+				}
+				funk(data);
+			},function (err){
+				console.log(err);
+			});
+			function funk(data){
+				if(data.status==200){
+					var homes="";
+					var videos=data.data;
+					for(i in videos){
+						if(videos[i].userInfo.视频发布者的昵称==null){
+							videos[i].userInfo.视频发布者的昵称="小明今晚打老虎";
+						}
+						if(videos[i].pinglun==undefined){
+							videos[i].pinglun=0;
+						}
+						if(videos[i].guankan==undefined){
+							videos[i].guankan=0;
+						}
+						homes+=`<div class="videos" data-ids=${videos[i].video.userid} data-vids=${videos[i].video.videoId}>
+									<img src=${videos[i].video.picture} alt="" />
+									<div>
+										<div>
+											<div>
+												<img src=${videos[i].userInfo.视频发布者的头像} alt="" />
+											</div>
+											<div>${videos[i].userInfo.视频发布者的昵称}</div>
+										</div>
+										<div>关注</div>
+									</div>
+									<div>
+										<div class="iconfont icon-pinglun1">
+											<span>${videos[i].pinglun}</span>
+										</div>
+										<div class="iconfont icon-z-likeFill" data-dianz=${videos[i].love.是否点赞}>
+											<span>${videos[i].love.点赞总数}</span>
+										</div>
+										<div class="iconfont icon-star" data-scs=${videos[i].collections.是否收藏}>
+											<span>${videos[i].collections.收藏总数}</span>
+										</div>
+										<div class="iconfont icon-zhibo-">
+											<span>${videos[i].guankan}</span>
+										</div>
+									</div>
+								</div>`;
+					}
+					$(".sets>div").append(homes);
+				}
+			}
+			
 			
 		},function(err){
 			console.log(err);
 		})
-		var parameter={
+		/*var parameter={
 			token:user.token,
 			page:1,//第几页
-			size:5,//每页多少
+			size:6,//每页多少
 			userId:user.user.userid,
 			categoryId:2,//视频分类id
 		}
 		ajaxsd("small/video/getBy/category",'get',parameter,function(data){
-			console.log(data);
+//			console.log(data);
 			if(data.status==200){
 				var homes="";
 				var videos=data.data;
@@ -181,12 +240,7 @@
 			
 		},function(err){
 			console.log(err);
-		})
-//切换类型
-		$("#swiper1 .swiper-slide").click(function(){
-			var index=$(this).data("catid");
-			console.log(index);
-		})
+		})*/
 //上传视频
 		$("#upvideo").click(function(){
 			window.location.href="../children/releases.html";

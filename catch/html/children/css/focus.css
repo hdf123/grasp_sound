@@ -22,6 +22,8 @@
 .focusd > div > div:nth-child(1) > div:nth-child(1) {
   width: 3.5rem;
   height: 3.5rem;
+  border-radius: 50%;
+  overflow: hidden;
 }
 .focusd > div > div:nth-child(1) > div:nth-child(1) > img {
   width: 100%;
@@ -33,6 +35,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+.focusd > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) {
+  width: 5rem;
+  height: 2rem;
+  line-height: 2rem;
+  font: normal 1.5rem PingFang-SC-Medium;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .focusd > div > div:nth-child(2) {
   width: 30%;
@@ -47,8 +58,13 @@
   align-items: center;
   justify-content: center;
   padding: 0.2rem 0.4rem;
-  border-radius: 0.3rem;
+  border-radius: 0.4rem;
   border: 1px solid #eeeeee;
+}
+
+.qux {
+  color: white;
+  background-color: #ff2e55;
 }
 
 /*# sourceMappingURL=focus.css.map */

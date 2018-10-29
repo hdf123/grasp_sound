@@ -55,7 +55,121 @@
 			</div>
 		</section>
 <script type="text/javascript">
-	
+	$(function(){
+		var user = JSON.parse(localStorage.getItem('user'));
+		var parameter={
+			token:user.token,
+			userId:user.user.userid
+		}
+		function funks(){
+			if(data.status==321){
+				window.location.href="../login/login.html";
+			}
+		}
+		ajaxsd("message/page/get/fans/list",'post',parameter,function(data){
+			console.log(data);
+			funks();
+			var data=data.data;
+			var ks="";
+			for(i in data){
+				var time=data[i].attentionTime;
+				var sd=new Date(time).toLocaleString();
+				var kts="",tianj="";
+				//关注
+				if(data[i].whetherAttention){
+					tianj=`<div class="guanz" >相互<br />关注</div>`;
+				}else{
+					tianj=`<div class="guanz qux">关注</div>`;
+				}
+				//好友
+				if(data[i].whetherFriend){
+					kts=`<div class="tianj" >删除<br />好友</div>`;
+				}else{
+					kts=`<div class="tianj qux">添加<br />好友</div>`;
+				}
+				ks+=`<div class="focusd" data-usids=${data[i].userID} data-focus=${data[i].whetherAttention} data-friend=${data[i].whetherFriend}>
+						<div>
+							<div>
+								<div>
+									<img src=${data[i].Portrait} alt="" />
+								</div>
+								<div>
+									<div>${data[i].Nickname}</div>
+									<div></div>
+									<div>${sd}</div>
+								</div>
+							</div>
+							<div>
+								${tianj}
+								${kts}
+							</div>
+						</div>
+					</div>`
+			}
+			$(".sets>div").html(ks);
+//关注
+			$(".sets").on("click",".guanz",function(){
+				var focuk=$(this);
+				var usids=$(this).closest(".focusd").data("usids");//关注人的id
+				var guanzhu={
+				 	token:user.token,
+					fansId:user.user.userid,//自己的id
+					beFocusedId:usids//被关注者的 ID
+				}
+				ajaxsd("small/video/attention",'post',guanzhu,function(data){
+					console.log(data);
+					funks();
+					if(focuk.css("background-color")=="rgb(255, 46, 85)"){
+						focuk.html(`取消<br />关注`);
+						focuk.removeClass("qux");
+					}else{
+						focuk.html(`关注`);
+						focuk.addClass("qux");
+					}
+				},function(err){
+					console.log(err);
+				})
+				
+				console.log(usids);
+			})
+//添加好友
+			$(".sets").on("click",".tianj",function(){
+				var focuk=$(this);
+				var usids=$(this).closest(".focusd").data("usids");//关注人的id
+				var friend=$(this).closest(".focusd").data("friend");//好友关系
+				var friends={
+				 	token:user.token,
+					accid:"zhuayin"+user.user.userid,//自己的id
+					faccid:"zhuayin"+usids//加好友接收者的 id
+				}
+				if(focuk.css("background-color")=="rgb(255, 46, 85)"){//红色，不是好友，添加
+					ajaxsd("wangyi/im/SingleChat/add/friend",'post',friends,function(data){
+						console.log(data);
+						funks();
+						if(data.status==200){
+							focuk.html(`删除<br />好友`);
+							focuk.removeClass("qux");
+						}else if(data.status==123){
+							alert("添加好友失败");
+						}
+					},function(err){
+						console.log(err);
+					})
+				}else{//false,不是好友，添加好友
+					ajaxsd("wangyi/im/SingleChat/delete/friend",'post',friends,function(data){
+						console.log(data);
+						funks();
+						focuk.html(`添加<br />好友`);
+						focuk.addClass("qux");
+					},function(err){
+						console.log(err);
+					})
+				}
+			})
+		},function(err){
+			console.log(err);
+		})
+	})
 </script>
 	</body>
 </html>
