@@ -28,6 +28,7 @@ header > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(
   height: 5rem;
   border-radius: 50%;
   overflow: hidden;
+  margin: 0 auto;
 }
 header > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > img {
   width: 100%;

@@ -73,10 +73,9 @@
 <script type="text/javascript">
 	$(function(){
 		var _token = JSON.parse(localStorage.getItem('TT_TOKEN'));
-		var user="";
+		var user="",arr=[];
 //获取个人信息
 		ajaxsd("user/token/"+_token+"?token="+_token,'post',{},function(data){
-			console.log(data);
 			if(data.status==321){
 				window.location.href="../login/login.html";
 			}
@@ -101,9 +100,10 @@
 			})
 //上拉加载
 			loadmore($(".sets"),'http://39.104.127.252:8084/homepage/video/recommended','get',parameter,function (data){//上拉加载数据
-				if(data.status==985){
+				if(data.status==321){
 					window.location.href="../login/login.html";
 				}
+				console.log(data);
 				funk(data);
 			},function (err){
 				console.log(err);
@@ -113,17 +113,40 @@
 		})
 		function funk(data){
 			if(data.status==200){
-				var homes="";
+				var homes="",dianzan="",shoucang="";
 				var videos=data.data;
 				for(i in videos){
-					if(videos[i].pinglun==undefined){
+					if(videos[i].pinglun==undefined){//评论
 						videos[i].pinglun=0;
 					}
-					if(videos[i].guankan==undefined){
-						videos[i].guankan=0;
+					if(videos[i].love.点赞总数>99){
+						videos[i].love.点赞总数="99+"
 					}
-					//发布者id、视频id、
-					homes+=`<div class="videos" data-usids=${videos[i].video.userid} data-vids=${videos[i].video.videoId}>
+					if(videos[i].collections.收藏总数>99){
+						videos[i].collections.收藏总数="99+"
+					}
+					//是否点过赞
+					if(videos[i].love.是否点赞=="是"){
+						dianzan=`<div class="dianzan iconfont icon-z-likeFill" data-dianz=${videos[i].love.是否点赞}>
+									<span>${videos[i].love.点赞总数}</span>
+								</div>`;
+					}else{
+						dianzan=`<div class="dianzan iconfont icon-dianzan2" data-dianz=${videos[i].love.是否点赞}>
+									<span>${videos[i].love.点赞总数}</span>
+								</div>`;
+					}
+					//是否点已收藏
+					if(videos[i].collections.是否收藏=="是"){
+						shoucang=`<div class="shoucang iconfont icon-star" data-scs=${videos[i].collections.是否收藏}>
+									<span>${videos[i].collections.收藏总数}</span>
+								</div>`;
+					}else{
+						shoucang=`<div class="shoucang iconfont icon-unie601" data-scs=${videos[i].collections.是否收藏}>
+									<span>${videos[i].collections.收藏总数}</span>
+								</div>`;
+					}
+					//发布者id、视频id、视频连接
+					homes+=`<div class="videos" data-usids=${videos[i].video.userid} data-vids=${videos[i].video.videoId} data-videos=${videos[i].video.video}>
 								<img src=${videos[i].video.picture} alt="" />
 								<div>
 									<div>
@@ -132,78 +155,41 @@
 										</div>
 										<div>${videos[i].userInfo.视频发布者的昵称}</div>
 									</div>
-									<div class="focuk iconfont" data-attention=${videos[i].attention}></div>
 								</div>
 								<div>
-									<div class="iconfont icon-pinglun1">
+									<div class="iconfont icon-pinglun2">
 										<span>${videos[i].pinglun}</span>
 									</div>
-									<div class="dianz iconfont icon-z-likeFill" data-dianz=${videos[i].love.是否点赞}>
-										<span>${videos[i].love.点赞总数}</span>
-									</div>
-									<div class="scs iconfont icon-star" data-scs=${videos[i].collections.是否收藏}>
-										<span>${videos[i].collections.收藏总数}</span>
-									</div>
-									<div class="iconfont icon-zhibo-">
-										<span>${videos[i].guankan}</span>
+									${dianzan}
+									${shoucang}
+									<div class="iconfont icon-guankan">
+										<span>${videos[i].playNum}</span>
 									</div>
 								</div>
 							</div>`;
 				}
 				$(".sets>div").append(homes);
-				for(i in videos){
-					var attention=$(".sets").find(".focuk").eq(i).data("attention");//关注
-					var dianz=$(".sets").find(".focuk").eq(i).data("dianz");//点赞
-					var scs=$(".sets").find(".focuk").eq(i).data("scs");//收藏
-					console.log(attention);
-					if(attention==true){//关注
-						$(".sets").find(".focuk").eq(i).addClass("icon-weibiaoti105");
-					}else{
-						$(".sets").find(".focuk").eq(i).addClass("icon-dianzan1");
-					}
-					if(dianz=="是"){//点赞
-						$(".sets").find(".dianz").eq(i).css({"color":"red"});
-					}else{
-						$(".sets").find(".dianz").eq(i).css({"color":"gray"});
-					}
-					if(scs=="是"){//收藏
-						$(".sets").find(".scs").eq(i).css({"color":"red"});
-					}else{
-						$(".sets").find(".scs").eq(i).css({"color":"gray"});
-					}
-				}
 //点击播放当前视频
 				$(".sets").on("click",".videos",function(){
 					var usids=$(this).data("usids");//发布视频账号id
 					var vids=$(this).data("vids");//视频id
 					var videos=$(this).data("videos");//视频地址
-					window.location.href="../children/watch.html?usids="+usids+"&vids="+vids+"&videos="+videos;
-					
-				})
-//添加关注和取消关注
-				$(".sets").on("click",".focuk",function(event){
-					var usids=$(this).closest(".videos").data("usids");//视频发布者的id
-					var vids=$(this).closest(".videos").data("vids");//视频id
-					var focuk=$(this);
-					console.log(usids);
-					console.log(user);
-					var guanzhu={
-					 	token:user.token,
-						fansId:user.user.userid,//粉丝id
-						beFocusedId:usids//被关注者的 ID
+					var parameter={
+						token:user.token,
+						videoId:vids,
+						userId:user.user.userid
 					}
-					ajaxsd("small/video/attention",'post',guanzhu,function(data){
+					ajaxsd("small/video/record/playnum",'post',parameter,function(data){
 						console.log(data);
-						
+						if(data.status==200){
+							window.location.href="../children/watch.html?usids="+usids+"&vids="+vids+"&videos="+videos;
+						}else if(data.status==321){
+							window.location.href="../login/login.html";
+						}
 					},function(err){
 						console.log(err);
 					})
-					event.stopPropagation();//阻止冒泡
 				})
-
-
-
-			
 			}else if(data.status==321){
 				window.location.href="../login/login.html";
 			}

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title></title>
+		<title>视频</title>
 		<link rel="stylesheet" href="../../css/base.css" />
 		<link rel="stylesheet" href="../../css/iconfont.css" />
 		<link rel="stylesheet" href="../../css/layout.css" />
@@ -14,48 +14,187 @@
 	</head>
 	<body>
 		<div class="preview"></div>
-		<ul class="uus">
-			<li>头像</li>
-			<li class="iconfont icon-pinglun1">
-				<span>评论</span>
-			</li>
-			<li class="iconfont icon-z-likeFill">
-				<span>点赞</span>
-			</li>
-			<li class="iconfont icon-star">
-				<span>收藏</span>
-			</li>
-			<li class="iconfont icon-zhibo-">
-				<span>观看</span>
-			</li>
-		</ul>
+		<div class="focuk iconfont icon-dianzan1"></div>
+		<div class="uus_box">
+			<ul class="uus">
+				<li class="images">
+					<img src="../../img/home_03.png" alt="" />
+				</li>
+				<li class="iconfont icon-pinglun2">
+					<span>评论</span>
+				</li>
+				<li class="iconfont icon-z-likeFill">
+					<span>点赞</span>
+				</li>
+				<li class="iconfont icon-star">
+					<span>收藏</span>
+				</li>
+				<li class="iconfont icon-zhibo-">
+					<span>观看</span>
+				</li>
+			</ul>
+		</div>
 <script type="text/javascript">
-	var video="";
-//	var height=$(document).height();//不变
-	var height=$(window).height();//改变
-	$("body").css({"height":height,"display":"flex","align-items":"center"});
-//	$(".preview").css({"display":"flex","align-items":"center"});
-	console.log(height);
-	function getRequest() {
-  		var url=window.location.search; //获取url中"?"符后的字串
-  		var theRequest = new Object();
-  		if (url.indexOf("?") != -1){
-    		var str = url.substr(1);
-    		strs = str.split("&");
-    		for(var i = 0; i < strs.length; i ++) {
-      			theRequest[strs[i].split("=")[0]]=decodeURI(strs[i].split("=")[1]);
-    		}
-    		video=theRequest.videos;
-    		console.log(theRequest);//全部参数
-    		console.log(theRequest.usids);//指定参数
-    		console.log(theRequest.vids);//指定参数
-    		console.log(theRequest.videos);//指定参数
-  		}
-  		return theRequest;
-	}
-	var id=getRequest().id;
-	$(".preview").append("<video  controls='' id='video' width='100%' autoplay='' name='media'><source src="+video+" type='video/mp4'></video>");
-	
+	$(function(){
+		var user = JSON.parse(localStorage.getItem('user'));
+//		var height=$(document).height();//不变
+		var height=$(window).height();//改变
+		$("body").css({"height":height,"display":"flex","align-items":"center"});
+		function funks(data){
+			if(data.status==321){
+				window.location.href="../login/login.html";
+			}
+		}
+		function getRequest() {
+	  		var url=window.location.search; //获取url中"?"符后的字串
+	  		var theRequest = new Object();
+	  		if (url.indexOf("?") != -1){
+	    		var str = url.substr(1);
+	    		strs = str.split("&");
+	    		for(var i = 0; i < strs.length; i ++) {
+	      			theRequest[strs[i].split("=")[0]]=decodeURI(strs[i].split("=")[1]);
+	    		}
+	    		/*videos=theRequest.videos;//视频地址
+	    		vids=theRequest.vids;//视频id
+	    		usids=theRequest.usids;//发布视频账号id*/
+	  		}
+	  		return theRequest;
+		}
+		videos=getRequest().videos;//视频地址
+		vids=getRequest().vids;//视频id
+		usids=getRequest().usids;//发布视频账号id
+		$(".preview").append("<video  controls='' id='video' width='100%' autoplay='' name='media'><source src="+getRequest().videos+" type='video/mp4'></video>");
+		var parameter={
+			token:user.token,
+			userId:user.user.userid,
+			videoId:getRequest().vids
+		}
+		ajaxsd("small/video/get/video/details",'post',parameter,function(data){
+			funks(data);
+			var data=data.data;
+			console.log(data);
+			var attention=$(".focuk").data("attention");//关注	
+			if(data.attention==true){//关注
+				$(".focuk").removeClass("icon-weibiaoti105");//关注
+				$(".focuk").addClass("icon-weibiaoti105");//关注
+			}else{
+				$(".focuk").addClass("icon-dianzan1");//没有关注
+			}
+			$(".uus_box").html(`<ul class="uus">
+									<li class="images">
+										<img src=${data.userInfo.视频发布者的头像} alt="" />
+									</li>
+									<li class="iconfont icon-pinglun2">
+										<span>评论</span>
+									</li>
+									<li class="dianzan iconfont icon-dianzan2" data-dianz=${data.love.是否点赞} data-numzan=${data.love.点赞总数}>
+										<span>${data.love.点赞总数}</span>
+									</li>
+									<li class="shoucang iconfont icon-unie601" data-scs=${data.collections.是否收藏} data-numshou=${data.collections.收藏总数}>
+										<span>${data.collections.收藏总数}</span>
+									</li>
+									<li class="iconfont icon-guankan">
+										<span>${data.playNum}</span>
+									</li>
+								</ul>`);
+			if(data.love.是否点赞=="是"){
+				$(".dianzan").addClass("icon-z-likeFill");
+				$(".dianzan").removeClass("icon-dianzan2");
+				$(".dianzan").css({"color":"#FF5D66"});
+			}else{
+				$(".dianzan").addClass("icon-dianzan2");
+				$(".dianzan").removeClass("icon-z-likeFill");
+				$(".dianzan").css({"color":"white"});
+			}
+			if(data.collections.是否收藏=="是"){
+				$(".shoucang").addClass("icon-star");
+				$(".shoucang").removeClass("icon-unie601");
+				$(".shoucang").css({"color":"#FF5D66"});
+			}else{
+				$(".shoucang").addClass("icon-unie601");
+				$(".shoucang").removeClass("icon-star");
+				$(".shoucang").css({"color":"white"});
+			}
+			var parameter={
+				token:user.token,
+				videoId:getRequest().vids,
+				userId:user.user.userid
+			}
+//关注
+			$(".focuk").click(function(event){
+				var usids=$(this).closest(".videos").data("usids");//视频发布者的id
+				var focuk=$(this);
+				var guanzhu={
+				 	token:user.token,
+					fansId:user.user.userid,//粉丝id
+					beFocusedId:getRequest().usids//被关注者的 ID
+				}
+				ajaxsd("small/video/attention",'post',guanzhu,function(data){
+					if(focuk.is(".icon-weibiaoti105")){
+						focuk.addClass("icon-dianzan1");//没有关注
+						focuk.removeClass("icon-weibiaoti105");
+					}else{
+						focuk.removeClass("icon-dianzan1");
+						focuk.addClass("icon-weibiaoti105");//关注
+					}
+				},function(err){
+					console.log(err);
+				})
+				event.stopPropagation();//阻止冒泡
+			})
+//点赞
+			$(".dianzan").click(function(event){
+				var thisd=$(this);
+				var numzan=$(this).data("numzan");
+				ajaxsd("small/video/love",'post',parameter,function(data){
+					if(data.status==200){
+						var data=data.data;
+						if(data.love.是否点赞=="是"){
+							thisd.addClass("icon-z-likeFill");
+							thisd.removeClass("icon-dianzan2");
+							thisd.css({"color":"#FF5D66"});
+							$(".dianzan>span").html(data.love.点赞总数);
+						}else{
+							thisd.addClass("icon-dianzan2");
+							thisd.removeClass("icon-z-likeFill");
+							thisd.css({"color":"white"});
+							$(".dianzan>span").html(data.love.点赞总数);
+						}
+					}
+				},function(err){
+					console.log(err);
+				})
+				event.stopPropagation();//阻止冒泡
+			})
+//收藏
+			$(".shoucang").click(function(event){
+				var thisd=$(this);
+				var numshou=$(this).data("numshou");
+				ajaxsd("small/video/collection",'post',parameter,function(data){
+					console.log(data);
+					if(data.status==200){
+						var data=data.data;
+						if(data.collections.是否收藏=="是"){
+							thisd.addClass("icon-star");
+							thisd.removeClass("icon-unie601");
+							thisd.css({"color":"#FF5D66"});
+							$(".shoucang>span").html(data.collections.收藏总数);
+						}else{
+							thisd.addClass("icon-unie601");
+							thisd.removeClass("icon-star");
+							thisd.css({"color":"white"});
+							$(".shoucang>span").html(data.collections.收藏总数);
+						}
+					}
+				},function(err){
+					console.log(err);
+				})
+				event.stopPropagation();//阻止冒泡
+			})
+		},function(err){
+			console.log(err);
+		})
+	})
 </script>
 	</body>
 </html>

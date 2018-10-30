@@ -122,33 +122,40 @@ html, body {
 .videos > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) {
   width: 6rem;
   height: 2rem;
+  color: white;
   font: normal 1.5rem PingFang-SC-Medium;
   margin-left: 0.3rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.videos > div:nth-child(2) > div:nth-child(2) {
-  color: #ff2e55;
-  font: normal 1.5rem PingFang-SC-Medium;
-}
 .videos > div:nth-child(3) {
+  width: 100%;
+  height: 2rem;
   position: absolute;
   left: 0;
   bottom: 0.3rem;
   display: flex;
 }
 .videos > div:nth-child(3) > div {
-  color: gray;
+  max-width: 25%;
+  height: 100%;
+  color: white;
   font-size: 1.8rem;
   display: flex;
   align-items: flex-end;
   margin-left: 0.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .videos > div:nth-child(3) > div span {
   display: block;
-  color: gray;
+  color: white;
   font-size: 1rem;
+}
+.videos > div:nth-child(3) > .icon-z-likeFill, .videos > div:nth-child(3) .icon-star {
+  color: #FF5D66;
 }
 
 /*# sourceMappingURL=layout.css.map */

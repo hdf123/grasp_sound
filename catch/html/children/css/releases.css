@@ -135,6 +135,7 @@
   margin: 0 auto;
   display: flex;
   align-items: center;
+  margin-bottom: 1rem;
 }
 .tys > div:nth-child(1) > div:nth-child(1) {
   font: normal 1.6rem STHeitiSC-Light;
@@ -144,6 +145,7 @@
   outline: none;
   padding: 1% 5%;
   background: white;
+  font: normal 1.4rem STHeitiSC-Light;
 }
 .tys > div:nth-child(1) > select > option {
   font: normal 1.6rem STHeitiSC-Light;

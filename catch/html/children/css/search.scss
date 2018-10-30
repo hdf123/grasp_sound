@@ -1,0 +1,75 @@
+@import "../../../css/style.scss";
+header{
+    width:100%;
+    height:4rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0rem 0rem 0.213rem 0rem rgba(102, 102, 102, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    &>div:nth-child(1){
+        width:10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size:2rem;
+    }
+    &>#myform{
+        width:75%;
+        font-size:2rem;
+        &>input{
+            width:100%;
+            height:2.5rem;
+            outline: none;
+            border:none;
+            font:$fontc;
+            border-bottom:1px solid lime;
+        }
+        &>input[type=search]::-webkit-search-cancel-button{
+            -webkit-appearance: none;
+        }
+    }
+    >#btn{
+        width:15%;
+        height:1.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font:$fontb;
+    }
+}
+section{
+    width:100%;
+    overflow: auto;
+    position: absolute;
+    top:4rem;
+    left:0;
+    bottom:0;
+}
+.fou_rm{
+    box-sizing: border-box;
+    width:90%;
+    margin:0.6rem auto;
+    padding:0.2rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffffff;
+    box-shadow: 0rem 0rem 1rem 0rem rgba(164, 164, 164, 0.41);
+    border-radius:3rem;
+    &>div:nth-child(1)>div{
+        font-size:0.5rem;
+    }
+    &>div:nth-child(2){
+        display: flex;
+        align-items: center;
+        &>span{
+            padding:0.2rem 0.5rem;
+            font-size: 0.512rem;
+            background-color: #607cf4;
+            box-shadow: 0rem 0rem 0.269rem 0.073rem rgba(96, 124, 244, 0.41);
+            border-radius: 0.48rem;
+            color: #ffffff;
+        }
+    }
+}
