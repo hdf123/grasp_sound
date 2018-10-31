@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>我的</title>
+		<link rel="stylesheet" href="../../css/base.css" />
+		<link rel="stylesheet" href="../../css/iconfont.css" />
+		<link rel="stylesheet" href="../../css/layout.css" />
+		<link rel="stylesheet" href="css/info.css" />
+		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/ajaxs.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/children.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<header>
+			<div>
+				<div>
+					<div class="iconfont icon-houtui" onclick="javascript:history.back(-1);"></div>
+				</div>
+				<div class="information">
+					<div>
+						<div><img src="../../img/home_03.png"/></div>
+						<div>名字</div>
+					</div>
+					<div>
+						<div>上海</div>
+						<div>女</div>
+					</div>
+				</div>
+				<div>个人说明：<span class="instructions">说点什么好呢说点什么好呢说点什么好呢说点什么好呢</span></div>
+			</div>
+			<div>
+				<div class="taba">
+					<div>
+						<div>视频</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="sets ask"></div>
+<script type="text/javascript">
+	$(function(){
+		var user = JSON.parse(localStorage.getItem('user'));
+		var my=new Swiper("#swiper1",{
+			on:{
+			    slideChangeTransitionStart: function(my){//swiper4中使用
+			      	var xiabiao=this.realIndex;//循环状态下获取下标
+		        	console.log(xiabiao);
+		        	$(".taba>div").eq(xiabiao).children("div").css({
+						"border-bottom":"0.25rem solid #36E0D6"
+					}).parent().siblings().children("div").css({
+						"border":"none"
+					});
+			    }
+			}
+		})
+//获取传参
+		function getRequest() {
+	  		var url=window.location.search; //获取url中"?"符后的字串
+	  		var theRequest = new Object();
+	  		if (url.indexOf("?") != -1) {
+	    		var str = url.substr(1);
+	    		strs = str.split("&");
+	    		for(var i = 0; i < strs.length; i ++) {
+	      			theRequest[strs[i].split("=")[0]]=decodeURI(strs[i].split("=")[1]);
+	    		}
+	  		}
+	  		return theRequest;
+		}
+		var info=getRequest().info;
+		console.log(info);
+//个人信息
+		var parameter={
+			token:user.token,
+			userId:info
+		}
+		ajaxsd("app/my/to/other/info",'post',parameter,function(data){
+			console.log(data);
+			if(data.status==321){
+				window.location.href="../login/login.html";
+			}
+			var data=data.data;
+			var sd=data.address;
+			sd=sd.split(" ");
+			$(".information").html(`<div>
+										<div><img src=${data.portrait} /></div>
+										<div>${data.nickname}</div>
+									</div>
+									<div>
+										<div>${sd[0]}</div>
+										<div>${data.gender}</div>
+									</div>`)
+			$(".instructions").html(data.signature);
+		},function(err){
+			console.log(err);
+		})
+//我的视频
+		var parameter={
+			token:user.token,
+			userId:info,
+			page:1,//第几页
+			size:12//每页多少
+		}
+		ajaxsd("app/my/videos",'post',parameter,function(data){
+			console.log(data);
+			funks(data);
+		},function(err){
+			console.log(err);
+		})
+	//上拉加载
+		loadmore($(".ask"),'http://39.104.127.252:8084/homepage/video/recommended','get',parameter,function (data){//上拉加载数据
+			funks(data);
+		},function (err){
+			console.log(err);
+		});
+		function funks(data){
+			if(data.status==321){
+				window.location.href="../login/login.html";
+			}
+			var videos=data.data,ks="";
+			for(i in videos){
+				ks+=`<div class="videos" data-usids=${videos[i].video.userid} data-vids=${videos[i].video.videoId} data-videos=${videos[i].video.video}>
+						<div>
+							<img src=${videos[i].video.picture} alt="" />
+						</div>
+					</div>`;
+			}
+			$(".ask").append(ks);
+//点击播放当前视频
+			$(".ask").on("click",".videos",function(){
+				console.log(11);
+				var usids=$(this).data("usids");//发布视频账号id
+				var vids=$(this).data("vids");//视频id
+				var videos=$(this).data("videos");//视频地址
+				var parameter={
+					token:user.token,
+					videoId:vids,
+					userId:user.user.userid
+				}
+				ajaxsd("small/video/record/playnum",'post',parameter,function(data){
+					console.log(data);
+					if(data.status==200){
+						window.location.href="../children/watch.html?usids="+usids+"&vids="+vids+"&videos="+videos;
+					}else if(data.status==321){
+						window.location.href="../login/login.html";
+					}
+				},function(err){
+					console.log(err);
+				})
+			})
+		}
+	})
+</script>
+	</body>
+</html>

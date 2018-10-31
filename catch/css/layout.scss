@@ -72,6 +72,7 @@ html, body {
     position: relative;
     top:-2rem;
     left:0;
+    z-index:1;
     border-radius:50%;
     background:#fff;
     box-shadow: 0rem -0.2rem 0.3rem 0.3rem rgba(54,224,214,0.2);
@@ -101,7 +102,8 @@ html, body {
         top:0.5rem;
         left:5%;
         >div:nth-child(1){
-            display: flex;
+            width:10rem;
+            display:flex;
             align-items:center;
             >div:nth-child(1){
                 width:2.5rem;
@@ -152,4 +154,7 @@ html, body {
             color:#FF5D66;
         }
     }
+}
+.nowLoad,.endLoad{
+    text-align: center;
 }

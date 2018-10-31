@@ -5,14 +5,6 @@ header{
         width:100%;
         background:#36E0D6;
         padding-bottom:0.5rem;
-        >div:nth-child(1){
-            width:100%;
-            height:4rem;
-            display:flex;
-            align-items: center;
-            justify-content: space-between;
-            padding:0 1.5rem;
-        }
         >div:nth-child(2){
             width:100%;
             display: flex;
@@ -76,13 +68,13 @@ header{
         display: flex;
         align-items: center;
         justify-content: center;
-        >div{
+        >.taba{
             width:40%;
             display: flex;
             justify-content: space-between;
             margin:0 auto;
             >div{
-                width:50%;
+                width:100%;
                 height:4rem;
                 display: flex;
                 align-items: center;
@@ -96,21 +88,22 @@ header{
                     font:normal 1.5rem SimHei;
                 }
             }
-            >div:nth-child(1){
-                >div{
-                    border-bottom:0.25rem solid #36E0D6;
-                }
-            }
         }
     }
 }
-.icon-shezhi{
+.icon-houtui{
+    width:4rem;
+    height:3rem;
+    padding:0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color:white;
     font-size:2.6rem;
 }
 .sets{
     top:18.5rem;
-    bottom:5rem;
+    bottom:0;
 }
 .ask{
     width:100%;
@@ -131,21 +124,5 @@ header{
                 height:100%;
             }
         }
-    }
-}
-.sdk{
-    width:100%;
-    overflow: auto;
-    >div{
-        width:95%;
-        margin:0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content:space-between;
-    }
-}
-.footersd{
-    >a:nth-child(5){
-        color:#36e0d6;
     }
 }

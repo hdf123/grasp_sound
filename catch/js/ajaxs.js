@@ -91,7 +91,7 @@
 	                    //删除正在加载loadding
 	                    $('.nowLoad').remove();                    
 	                    //更换loadding为没有数据
-	                    $(element).append('<p class="endLoad">没有数据了...</p>');
+	                    $(element).after('<p class="endLoad">没有数据了...</p>');
 	                    function fg(){
 	                    	$(".endLoad").remove();
 	                    }

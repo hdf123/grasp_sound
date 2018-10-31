@@ -34,12 +34,53 @@
 				</li>
 			</ul>
 		</div>
+		<div class="comments_box">
+			<div>
+				<div class="comments_father">
+					<div>小白：<span>今晚打老虎今晚打老虎今晚打老虎今晚打老虎今晚打老虎今晚打老虎今晚打老虎</span></div>
+					<div class="comments_child">
+						<div>
+							<span>小明</span> 回复
+							<span>小白</span>:
+							<span>666</span>
+						</div>
+						<div>
+							<span>小黄</span> 回复
+							<span>小白</span>:
+							<span>777</span>
+						</div>
+						<div>
+							<span>小黑</span> 回复
+							<span>小黄</span>:
+							<span>888</span>
+						</div>
+					</div>
+				</div>
+				<div class="comments_father">
+					<div>小白：<span>今晚打老虎今晚打老虎今晚打老虎今晚打老虎今晚打老虎今晚打老虎今晚打老虎</span></div>
+					<div class="comments_child">
+						<div>
+							<span>小明</span> 回复
+							<span>小白</span>:
+							<span>111</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div id="sends">
+				<input type="text" value="" />
+				<div>发送</div>
+			</div>
+		</div>
 <script type="text/javascript">
 	$(function(){
 		var user = JSON.parse(localStorage.getItem('user'));
 //		var height=$(document).height();//不变
 		var height=$(window).height();//改变
 		$("body").css({"height":height,"display":"flex","align-items":"center"});
+//		$(".comments_box").hide();//进入页面先隐藏评论
 		function funks(data){
 			if(data.status==321){
 				window.location.href="../login/login.html";
@@ -191,6 +232,81 @@
 				})
 				event.stopPropagation();//阻止冒泡
 			})
+//评论
+		    $(document).click(function(){//点击其他区域，隐藏评论
+		    	$(".comments_box").hide();
+		    })	
+		    $(".comments_box").click(function(event){
+		    	event.stopPropagation();//阻止冒泡
+		    })
+			$(".icon-pinglun2").click(function(event){//点击获取评论
+				$(".comments_box").show();
+				var parameter={
+					token:user.token,
+					videoId:vids
+				}
+				ajaxsd("small/video/list/Comment",'post',parameter,function(data){
+					console.log(data);
+					var data=data.data,sk="",sf="";
+					
+					for(i in data){
+						if(data[i].length>1){
+							for(j in data[i]){
+								if(j<1){
+									sk+=`<div class="comments_father">
+											<div>${data[i][0].publisher}：<span>${data[i][0].body}</span></div>
+											<div class="comments_child">
+												${sf}
+											</div>
+										</div>`;
+								}else{
+									sf+=`<div>
+					 						<span>${data[i][j].reply}</span> 回复
+					 						<span>${data[i][j].replyTo}</span>:
+					 						<span>${data[i][j].body}</span>
+					 					</div>`;
+								}
+							}
+						}else{
+							sk+=`<div class="comments_father">
+									<div>${data[i][0].publisher}：<span>${data[i][0].body}</span></div>
+									<div class="comments_child">
+										${sf}
+									</div>
+								</div>`;
+						}
+					}
+					$(".comments_box>div").html(sk);
+					
+					
+					
+				},function(err){
+					console.log(err);
+				})
+				event.stopPropagation();//阻止冒泡
+			})
+			
+			//发表评论
+			/*var parameter={
+				token:user.token,
+				videoId:vids,//视频id
+				userId:user.user.userid,//用户id
+				parentId:1,//如果是视频的评论则为 0；对评论的回复写那条（根）评论的id
+				user2Id:17,//如果是视频的评论则为 0；对评论的回复写那条评论发布人的id
+				body:"测试二号3"//回复内容
+			}	
+			ajaxsd("small/video/add/Comment",'post',parameter,function(data){
+				console.log(data);
+			},function(err){
+				console.log(err);
+			})*/
+			
+			
+			
+			
+			
+			
+			
 		},function(err){
 			console.log(err);
 		})

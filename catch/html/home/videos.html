@@ -172,7 +172,7 @@
 						homes+=`<div class="videos" data-usids=${videos[i].video.userid} data-vids=${videos[i].video.videoId} data-videos=${videos[i].video.video}>
 									<img src=${videos[i].video.picture} alt="" />
 									<div>
-										<div>
+										<div class="datak">
 											<div>
 												<img src=${videos[i].userInfo.视频发布者的头像} alt="" />
 											</div>
@@ -213,6 +213,15 @@
 							console.log(err);
 						})
 					})
+//点击头像，查看个人资料
+					$(".sets").on("click",".datak",function(event){
+						var usids=$(this).closest(".videos").data("usids");//发布视频账号id
+						console.log(usids);
+						window.location.href="../children/info.html?info="+usids;
+						event.stopPropagation();
+					})
+					
+					
 				}else if(data.status==321){
 					window.location.href="../login/login.html";
 				}
