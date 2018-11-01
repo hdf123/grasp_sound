@@ -3,6 +3,19 @@ body {
   background: #000000;
 }
 
+.icon-houtui {
+  width: 4rem;
+  height: 3rem;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: white;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .focuk {
   position: absolute;
   top: 2rem;
@@ -14,7 +27,7 @@ body {
 .uus_box {
   position: absolute;
   bottom: 6rem;
-  right: 0;
+  right: 1rem;
 }
 .uus_box > .uus {
   list-style: none;
@@ -45,11 +58,10 @@ body {
 
 .comments_box {
   width: 100%;
-  height: 75%;
   position: absolute;
-  top: 25%;
+  top: 20%;
   left: 0;
-  bottom: 0;
+  bottom: 3rem;
   overflow: auto;
   background: white;
   border-top-left-radius: 0.6rem;
@@ -62,21 +74,24 @@ body {
 
 .comments_father {
   padding: 0.2rem 0 0.2rem 2rem;
-  border-bottom: 1px solid #d2d2d2;
+  border-bottom: 1px solid #eeeeee;
 }
 .comments_father > div:nth-child(1) {
   font: normal 1.3rem STHeitiSC-Light;
   color: #2FA8EC;
-  padding: 0.2rem 2rem 0.2rem 0;
-  border-bottom: 1px solid #eeeeee;
+  padding: 0.5rem 2rem 0.5rem 0;
 }
 .comments_father > div:nth-child(1) > span {
   color: black;
   font: normal 1.2rem STHeitiSC-Light;
 }
 
+.resp {
+  border-bottom: 1px solid #f4f4f4;
+}
+
 .comments_child > div {
-  padding: 0.1rem 0;
+  padding: 0.3rem 1rem 0.3rem 2rem;
 }
 .comments_child > div > span:nth-child(1), .comments_child > div > span:nth-child(2) {
   color: #2FA8EC;
@@ -91,25 +106,34 @@ body {
 
 #sends {
   width: 100%;
+  height: 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0.3rem;
   background: white;
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
+  padding: 0.2rem 0 0.5rem 1rem;
+  background: #eeeeee;
 }
 #sends > input {
   width: 80%;
-  height: 1.5rem;
-  font-size: 0.64rem;
+  height: 100%;
+  padding: 0.2rem 0.4rem;
+  font: normal 1.5rem STHeitiSC-Light;
   outline: none;
+  background-color: transparent;
+  border-bottom: 1px solid lime;
 }
 #sends > div {
-  width: 18%;
-  font-size: 1.2rem;
-  text-align: center;
+  width: 20%;
+  height: 100%;
+  font: normal 1.7rem STHeitiSC-Light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid #eeeeee;
 }
 
 /*# sourceMappingURL=watch.css.map */

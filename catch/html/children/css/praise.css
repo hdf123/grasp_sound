@@ -17,11 +17,14 @@
   margin: 0.5rem auto;
 }
 .focusd > div > div:nth-child(1) {
+  height: 3.5rem;
   display: flex;
 }
 .focusd > div > div:nth-child(1) > div:nth-child(1) {
   width: 3.5rem;
   height: 3.5rem;
+  border-radius: 50%;
+  overflow: hidden;
 }
 .focusd > div > div:nth-child(1) > div:nth-child(1) > img {
   width: 100%;
@@ -34,8 +37,15 @@
   flex-direction: column;
   justify-content: space-around;
 }
+.focusd > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) {
+  font: normal 1.6rem STHeitiSC-Light;
+}
+.focusd > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) {
+  font: normal 1.2rem STHeitiSC-Light;
+}
 .focusd > div > div:nth-child(2) {
   height: 100%;
+  color: #FF5D66;
   font-size: 2.5rem;
   display: flex;
   align-items: center;

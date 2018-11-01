@@ -42,19 +42,6 @@
 <script type="text/javascript">
 	$(function(){
 		var user = JSON.parse(localStorage.getItem('user'));
-		var my=new Swiper("#swiper1",{
-			on:{
-			    slideChangeTransitionStart: function(my){//swiper4中使用
-			      	var xiabiao=this.realIndex;//循环状态下获取下标
-		        	console.log(xiabiao);
-		        	$(".taba>div").eq(xiabiao).children("div").css({
-						"border-bottom":"0.25rem solid #36E0D6"
-					}).parent().siblings().children("div").css({
-						"border":"none"
-					});
-			    }
-			}
-		})
 //获取传参
 		function getRequest() {
 	  		var url=window.location.search; //获取url中"?"符后的字串

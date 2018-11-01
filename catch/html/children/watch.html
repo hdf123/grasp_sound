@@ -34,45 +34,13 @@
 				</li>
 			</ul>
 		</div>
+		<div class="iconfont icon-houtui" onclick="javascript:history.back(-1);"></div>
 		<div class="comments_box">
-			<div>
-				<div class="comments_father">
-					<div>小白：<span>今晚打老虎今晚打老虎今晚打老虎今晚打老虎今晚打老虎今晚打老虎今晚打老虎</span></div>
-					<div class="comments_child">
-						<div>
-							<span>小明</span> 回复
-							<span>小白</span>:
-							<span>666</span>
-						</div>
-						<div>
-							<span>小黄</span> 回复
-							<span>小白</span>:
-							<span>777</span>
-						</div>
-						<div>
-							<span>小黑</span> 回复
-							<span>小黄</span>:
-							<span>888</span>
-						</div>
-					</div>
-				</div>
-				<div class="comments_father">
-					<div>小白：<span>今晚打老虎今晚打老虎今晚打老虎今晚打老虎今晚打老虎今晚打老虎今晚打老虎</span></div>
-					<div class="comments_child">
-						<div>
-							<span>小明</span> 回复
-							<span>小白</span>:
-							<span>111</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			
-			<div id="sends">
-				<input type="text" value="" />
-				<div>发送</div>
-			</div>
+			<div></div>
+		</div>
+		<div id="sends">
+			<input type="text" value="" placeholder="留下你的足迹吧"/>
+			<div>发送</div>
 		</div>
 <script type="text/javascript">
 	$(function(){
@@ -80,12 +48,14 @@
 //		var height=$(document).height();//不变
 		var height=$(window).height();//改变
 		$("body").css({"height":height,"display":"flex","align-items":"center"});
-//		$(".comments_box").hide();//进入页面先隐藏评论
-		function funks(data){
+		$(".comments_box").hide();//进入页面先隐藏评论
+		$("#sends").hide();//进入页面先隐藏输入框
+		function funms(data){
 			if(data.status==321){
 				window.location.href="../login/login.html";
 			}
 		}
+		//获取url中"?"符后的字串
 		function getRequest() {
 	  		var url=window.location.search; //获取url中"?"符后的字串
 	  		var theRequest = new Object();
@@ -95,9 +65,6 @@
 	    		for(var i = 0; i < strs.length; i ++) {
 	      			theRequest[strs[i].split("=")[0]]=decodeURI(strs[i].split("=")[1]);
 	    		}
-	    		/*videos=theRequest.videos;//视频地址
-	    		vids=theRequest.vids;//视频id
-	    		usids=theRequest.usids;//发布视频账号id*/
 	  		}
 	  		return theRequest;
 		}
@@ -105,15 +72,15 @@
 		vids=getRequest().vids;//视频id
 		usids=getRequest().usids;//发布视频账号id
 		$(".preview").append("<video  controls='' id='video' width='100%' autoplay='' name='media'><source src="+getRequest().videos+" type='video/mp4'></video>");
+//获取视频详情
 		var parameter={
 			token:user.token,
 			userId:user.user.userid,
 			videoId:getRequest().vids
 		}
 		ajaxsd("small/video/get/video/details",'post',parameter,function(data){
-			funks(data);
+			funms(data);
 			var data=data.data;
-			console.log(data);
 			var attention=$(".focuk").data("attention");//关注	
 			if(data.attention==true){//关注
 				$(".focuk").removeClass("icon-weibiaoti105");//关注
@@ -171,6 +138,7 @@
 					beFocusedId:getRequest().usids//被关注者的 ID
 				}
 				ajaxsd("small/video/attention",'post',guanzhu,function(data){
+					funms(data);
 					if(focuk.is(".icon-weibiaoti105")){
 						focuk.addClass("icon-dianzan1");//没有关注
 						focuk.removeClass("icon-weibiaoti105");
@@ -183,11 +151,18 @@
 				})
 				event.stopPropagation();//阻止冒泡
 			})
+//点击头像，查看个人资料
+			$(".uus").on("click",".images",function(event){
+				console.log(11);
+				window.location.href="../children/info.html?info="+usids;
+				event.stopPropagation();
+			})
 //点赞
 			$(".dianzan").click(function(event){
 				var thisd=$(this);
 				var numzan=$(this).data("numzan");
 				ajaxsd("small/video/love",'post',parameter,function(data){
+					funms(data);
 					if(data.status==200){
 						var data=data.data;
 						if(data.love.是否点赞=="是"){
@@ -212,7 +187,7 @@
 				var thisd=$(this);
 				var numshou=$(this).data("numshou");
 				ajaxsd("small/video/collection",'post',parameter,function(data){
-					console.log(data);
+					funms(data);
 					if(data.status==200){
 						var data=data.data;
 						if(data.collections.是否收藏=="是"){
@@ -235,78 +210,96 @@
 //评论
 		    $(document).click(function(){//点击其他区域，隐藏评论
 		    	$(".comments_box").hide();
+		    	$("#sends").hide();//进入页面先隐藏输入框
 		    })	
 		    $(".comments_box").click(function(event){
 		    	event.stopPropagation();//阻止冒泡
 		    })
+		    $("#sends").click(function(event){
+		    	event.stopPropagation();//阻止冒泡
+		    })
 			$(".icon-pinglun2").click(function(event){//点击获取评论
 				$(".comments_box").show();
+				funks();
+				$("#sends").show();//显示输入框
+				event.stopPropagation();//阻止冒泡
+			})
+//获取评论
+			function funks(){
 				var parameter={
 					token:user.token,
 					videoId:vids
 				}
 				ajaxsd("small/video/list/Comment",'post',parameter,function(data){
-					console.log(data);
-					var data=data.data,sk="",sf="";
-					
+					funms(data);
+					var data=data.data,sk="",arr=[];
 					for(i in data){
 						if(data[i].length>1){
+							arr=data[i].shift();
+							var sf="";
 							for(j in data[i]){
-								if(j<1){
-									sk+=`<div class="comments_father">
-											<div>${data[i][0].publisher}：<span>${data[i][0].body}</span></div>
-											<div class="comments_child">
-												${sf}
-											</div>
-										</div>`;
-								}else{
-									sf+=`<div>
-					 						<span>${data[i][j].reply}</span> 回复
-					 						<span>${data[i][j].replyTo}</span>:
-					 						<span>${data[i][j].body}</span>
-					 					</div>`;
-								}
+								sf+=`<div class="reply" data-userid=${data[i][j].userId} data-reply=${data[i][j].reply}>
+				 						<span>${data[i][j].reply}</span> 回复
+				 						<span>${data[i][j].replyTo}</span>:
+				 						<span>${data[i][j].body}</span>
+				 					</div>`;
 							}
+							sk+=`<div class="comments_father" data-commentsid=${arr.Id}>
+									<div class="reply resp" data-userid=${arr.userId} data-reply=${arr.publisher}>
+										${arr.publisher}：<span>${arr.body}</span>
+									</div>
+									<div class="comments_child">${sf}</div>
+								</div>`;
 						}else{
-							sk+=`<div class="comments_father">
-									<div>${data[i][0].publisher}：<span>${data[i][0].body}</span></div>
-									<div class="comments_child">
-										${sf}
+							sk+=`<div class="comments_father" data-commentsid=${data[i][0].Id}>
+									<div class="reply" data-userid=${data[i][0].userId} data-reply=${data[i][0].publisher}>
+										${data[i][0].publisher}：<span>${data[i][0].body}</span>
 									</div>
 								</div>`;
 						}
 					}
 					$(".comments_box>div").html(sk);
-					
-					
-					
+					$('.comments_box').scrollTop($('.comments_box>div')[0].scrollHeight);
+				},function(err){
+					console.log(err);
+				})	
+			}
+//回复评论
+			var commentsid="",userid="",sbs=false;//根评论id、评论发布者id
+			$(".comments_box").on("click",".reply",function(){
+				commentsid=$(this).closest(".comments_father").data("commentsid");//根评论id
+				userid=$(this).data("userid");//评论发布者id
+				sb=$(this);
+				sbs=true;
+				var reply=$(this).data("reply");//向xxx回复
+				$("#sends>input").attr("placeholder","回复 "+reply);
+			})
+//发表评论或回复
+			$("#sends>div").click(function(){
+				var sends=$("#sends>input").val();
+				var aa="",bb="";
+				if(sbs){
+					aa=commentsid;
+					bb=userid;
+				}else{
+					aa=0;
+					bb=0;
+				}
+				var parameter={
+					token:user.token,
+					videoId:vids,//视频id
+					userId:user.user.userid,//用户id
+					parentId:aa,//如果是视频的评论则为 0；对评论的回复写那条（根）评论的id
+					user2Id:bb,//如果是视频的评论则为 0；对评论的回复写那条评论发布人的id
+					body:sends//回复内容
+				}
+				ajaxsd("small/video/add/Comment",'post',parameter,function(data){
+					funms(data);
+					funks();
 				},function(err){
 					console.log(err);
 				})
-				event.stopPropagation();//阻止冒泡
 			})
-			
-			//发表评论
-			/*var parameter={
-				token:user.token,
-				videoId:vids,//视频id
-				userId:user.user.userid,//用户id
-				parentId:1,//如果是视频的评论则为 0；对评论的回复写那条（根）评论的id
-				user2Id:17,//如果是视频的评论则为 0；对评论的回复写那条评论发布人的id
-				body:"测试二号3"//回复内容
-			}	
-			ajaxsd("small/video/add/Comment",'post',parameter,function(data){
-				console.log(data);
-			},function(err){
-				console.log(err);
-			})*/
-			
-			
-			
-			
-			
-			
-			
 		},function(err){
 			console.log(err);
 		})

@@ -18,13 +18,39 @@
 				<div>评论</div>
 			</div>
 		</header>
-		
-		
-		
 		<section class="sets">
-			<div>
-				
-			</div>
+			<div></div>
 		</section>
+<script type="text/javascript">
+	$(function(){
+		var user = JSON.parse(localStorage.getItem('user'));
+		var parameter={
+			token:user.token,
+			userId:user.user.userid
+		}
+		ajaxsd("message/page/get/comment/myVideo",'post',parameter,function(data){
+			console.log(data);
+			var data=data.data;
+			var sk="";
+			for(i in data){
+				var time=data[i].commentTime;
+				var sd=new Date(time).toLocaleString();
+				sk+=`<div class="comments_box">
+						<div>
+							<div>
+								<img src=${data[i].Portrait} alt="" />
+							</div>
+							<div>${data[i].Nickname}</div>
+						</div>
+						<div>${data[i].commentBody}</div>
+						<div>${sd}</div>
+					</div>`;
+			}
+			$(".sets>div").html(sk);
+		},function(err){
+			console.log(err);
+		})
+	})
+</script>		
 	</body>
 </html>
