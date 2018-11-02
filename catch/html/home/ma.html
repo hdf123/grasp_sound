@@ -88,113 +88,52 @@
 	
 <script type="text/javascript">
 	$(function(){
+		var sd="";
 		var user = JSON.parse(localStorage.getItem('user'));
 		var ids="zhuayin"+user.user.userid;
-//好友列表
 		var parameter={
 			token:user.token,
 			accid:ids
 		}
 		ajaxsd("wangyi/im/SingleChat/get/friends",'post',parameter,function(data){
-			var datas=data.data,sd="";
-			var dataa="";//未读消息标记
-			var datab="";//消息记录
+			var datas=data.data,message="";
 			for(i in datas){
 				var accid=datas[i].accid;
-				var arr=[];
-	//未读消息标记
+	//获取未读消息标记
 				var unread={
 					token:user.token,
 					userID:ids,
 					friendId:accid
 				}
-				ajaxks("wangyi/im/SingleChat/get/unread/msg/flag",'post',unread,function(data){
-					dataa=data;
+				ajaxsd("wangyi/im/SingleChat/get/unread/msg/flag",'post',unread,function(data){
+					console.log(data);
+					var arrs=[];
+					tags=data.data;//未读消息标记
+		//获取历史消息
+					/*setInterval(showList,1000);
+					function showList(){
+						var parameter={
+							token:user.token,
+							from:ids,//发送者 accid
+							to:accid//接收者 accid
+						}
+						ajaxks("wangyi/im/SingleChat/query/SessionMsg",'post',parameter,function(data){
+							var data=data.data;
+							for(j in data){
+								if(data[j].from==accid){
+									if(data[j].msgid>tags){
+										arrs.push(data[j]);
+									}
+								}
+							}
+						},function(err){
+							console.log(err);
+						})
+					}*/
 				},function(err){
 					console.log(err);
-				})
-	//历史记录查询
-				setInterval(function(){
-					var parameter={
-						token:user.token,
-						from:ids,//发送者 accid
-						to:accid//接收者 accid
-					}
-					ajaxks("wangyi/im/SingleChat/query/SessionMsg",'post',parameter,function(data){
-						datab=data.data;
-						console.log(datab);
-					},function(err){
-						console.log(err);
-					})
-				},5000);
-				/*function{
-					var parameter={
-						token:user.token,
-						from:ids,//发送者 accid
-						to:accid//接收者 accid
-					}
-					ajaxks("wangyi/im/SingleChat/query/SessionMsg",'post',parameter,function(data){
-						datab=data.data;
-						console.log(datab);
-					},function(err){
-						console.log(err);
-					})
-				}*/
-	//获取最新消息内容、时间、数量
-				for(j in datab){
-					if(datab[j].from==accid){
-						if(datab[j].msgid>dataa.data){
-							arr.push(datab[j]);
-						}
-					}
-				}
-				function getMyDate(str){
-		            var oDate = new Date(str),
-		            oYear = oDate.getFullYear(),//年
-		            oMonth = oDate.getMonth()+1,//月
-		            oDay = oDate.getDate(),//日
-		            oHour = oDate.getHours(),//时
-		            oMin = oDate.getMinutes(),//分
-		            oSen = oDate.getSeconds(),//秒
-		            oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay);//最后拼接时间
-		            return oTime;
-				};
-		        //补0操作
-		      	function getzf(num){
-		          	if(parseInt(num) < 10){
-		              	num = '0'+num;
-		        	}
-					return num;
-				}
-		      	
-		      	var ka="",times="";//未读消息内容、添加html
-				if(arr.length>0){
-					ka=arr[0].body.msg;//未读消息内容
-					times=`<div>
-							<div>${getMyDate(arr[0].sendtime)}</div>
-							<div>${arr.length}</div>
-						</div>`;
-					
-					
-				}else{
-					ka="";//未读消息内容
-					times="";//未读消息最后时间
-				}
-				sd+=`<div data-imagek=${datas[i].icon} data-names=${datas[i].name} data-accid=${datas[i].accid}>
-						<div>
-							<div>
-								<img src=${datas[i].icon} alt="" />
-							</div>
-							<div>
-								<div>${datas[i].name}</div>
-								${ka}
-							</div>
-							${times}
-						</div>
-					</div>`;
-				
+				})	
 			}
-			$(".friends").html(sd);
 			//点击当前好友，开始会话
 			$(".friends").on("click",".friendsk",function(){
 				var imagek=$(this).data("imagek");

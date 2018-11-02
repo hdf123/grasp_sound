@@ -15,7 +15,7 @@
 	<body>
 		<header class="headers">
 			<div class="iconfont icon-houtui" onclick="javascript:history.back(-1);">
-				<div>XXX</div>
+				<div class="nameks">XXX</div>
 			</div>
 		</header>
 		<section class="sets">
@@ -49,12 +49,10 @@
 		}
 		var getRequest=getRequest().friends;//全部参数
 		var arr=getRequest.split(",");
-		console.log(arr);
-		console.log(arr[0]);
+		$(".nameks").html(arr[0]);
 //发送消息
 		$("#sends>div>div").click(function(){
 			var bodys=$("#sends>div>input").val();
-			console.log(bodys);
 	    	$(".speak").append(`<div class="mys gh">
 									<div class="rights">${bodys}</div>
 									<div class="portraits"><img src=${user.user.portrait} /></div>
@@ -85,7 +83,9 @@
 			ajaxsd("wangyi/im/SingleChat/query/SessionMsg",'post',parameter,function(data){
 				var data=data.data;
 				data.reverse();//颠倒获取的历史记录顺序
+				console.log(data);
 				for(i in data){
+//					console.log(data[i]);
 					if(data[i].sendtime>times){
 						times=data[i].sendtime;
 						if(data[i].from==ids){
@@ -101,7 +101,8 @@
 													+'<div class="lefts">'+data[i].body.msg+'</div>'
 												+'</div>');
 							$('section').scrollTop($('.speak')[0].scrollHeight);
-	//添加未读好友消息的标记
+					//添加未读好友消息的标记
+							localStorage.setItem('msgid', JSON.stringify(data[i].msgid));
 							var parameter={
 								token:user.token,
 								userID:ids,
@@ -109,20 +110,48 @@
 								msgid:data[i].msgid
 								
 							}
+							console.log(parameter);
 							ajaxsd("wangyi/im/SingleChat/add/unread/msg/flag",'post',parameter,function(data){
-								console.log(data);
+//								console.log(data);
 							},function(err){
 								console.log(err);
-							})	
+							})
 						}
 					}else{
-						console.log(22222);
+						console.log(2);
 					}
 				}
 			},function(err){
 				console.log(err);
 			})
 		}
+		//添加未读好友消息的标记
+		/*var msgid = JSON.parse(localStorage.getItem('msgid'));
+		console.log(msgid);
+		var parameter={
+			token:user.token,
+			userID:ids,
+			friendId:arr[2],
+			msgid:data[i].msgid
+			
+		}
+		console.log(parameter);
+		ajaxsd("wangyi/im/SingleChat/add/unread/msg/flag",'post',parameter,function(data){
+			console.log(data);
+		},function(err){
+			console.log(err);
+		})*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	})
 </script>
 	</body>

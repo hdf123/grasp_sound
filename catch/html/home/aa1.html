@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		
+		
+<script type="text/javascript">
+	var as="";
+	$.ajax({
+		type:"get",
+		async:false,
+		url:"aa.json",
+		success:function(data){
+			console.log(data);
+			as=data.data.a1;
+		},error:function(err){
+			console.log(err);
+		}
+	});
+	
+	
+	
+	
+	
+	console.log(as);
+</script>		
+	</body>
+</html>

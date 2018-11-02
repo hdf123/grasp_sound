@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div></div>
+		<button id="btn">111</button>
+
+<script type="text/javascript">
+$(function(){
+	$("#btn").live('click', function() {				
+		$("#btn").replaceWith('<button id="btn">正在刷新</button>');
+		$("#btndiv").css("background","red");
+		$.when(getData()).done(function(result){
+           	//一般会强制将data转化为json对象
+			//var redata = eval("(" + result + ")");
+		  	var responseData =  result;
+			$("#jf").text("积分:"+responseData.totalRows);
+			$("#btn").replaceWith('<button id="btn">刷新成功</button>');
+			$("#btndiv").css("background","blue");
+			$("#jf").text("积分:"+responseData.totalRows);
+   		}).fail(function(){
+		 	 alert("$.get 失败!");
+			  });
+		});
+		
+		
+		function getData(){		
+			var defer = $.Deferred();   //创建一个新的 Deferred（延迟）对象
+			//第一种方式： 将ajax 的异步请求设置为 false
+			var requestData = {
+				"name": "admin",
+				"passwd": "admin1"
+			};
+			$.ajax({
+				url: "http://localhost:8080/AJaxResult/AjaxServlet", // 模拟请求action后响应的json数据
+				data: requestData, // 请求的参数，可以是不同的形式
+				type: "GET", // 或者 POST
+				//dataType: "json",     // 预期服务器返回的数据类型。如果不指定，jQuery 将自动根据 HTTP 包 MIME 信息来智能判断,这里设置为 json
+				async: true, // 特别注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
+				success: function(result){
+					defer.resolve(result);  //解决Deferred（延迟）对象，并根据给定的参数调用任何 doneCallbacks 回调函数
+					//这个函数会在 延迟对象即ajax 执行完毕后，在调用回调函数的时候 将参数值 result  传递给回调方法
+				}
+			});
+			return defer.promise();  // 当ajax执行完毕，返回 Deferred 对象 
+			//它创建一个promise对象，其目的是在未来某个时间点返回一个响应。
+		}
+	});
+})
+</script>
+	</body>
+</html>
