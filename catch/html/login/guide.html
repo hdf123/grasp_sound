@@ -37,7 +37,11 @@
 	<body>
 		<div class="guide">立即体验</div>
 <script type="text/javascript">
-	
+	$(function(){
+		$(".guide").click(function(){
+			window.location.href="./login.html";
+		})
+	})
 	
 	/*console.log($(document).height());//不变
 	console.log($(window).height());//改变*/
