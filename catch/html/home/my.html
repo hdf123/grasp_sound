@@ -89,11 +89,6 @@
 //切换
 		$(".taba>div").click(function(){
 		    var index=$(this).index();
-//		    $(".taba>div").eq(index).children("div").css({
-//				"border-bottom":"0.25rem solid #36E0D6"
-//			}).parent().siblings().children("div").css({
-//				"border":"none"
-//			});
 		    $(".taba>div").eq(index).children("div").css({
 				"border-bottom":"0.25rem solid #36E0D6"
 			}).parent().siblings().children("div").css({
@@ -137,7 +132,7 @@
 		},function(err){
 			console.log(err);
 		})
-	//上拉加载
+//上拉加载
 		loadmore($(".ask"),'http://39.104.127.252:8084/homepage/video/recommended','get',parameter,function (data){//上拉加载数据
 			funks(data);
 		},function (err){
@@ -178,7 +173,7 @@
 				})
 			})
 		}
-//喜欢（我的收藏）
+	//喜欢（我的收藏）
 		var parameter={
 			token:user.token,
 			page:1,
@@ -256,7 +251,7 @@
 							</div>`;
 				}
 				$(".sdk>div").append(homes);
-//点击播放当前视频
+	//点击播放当前视频
 				$(".sdk").on("click",".videos",function(){
 					var usids=$(this).data("usids");//发布视频账号id
 					var vids=$(this).data("vids");//视频id

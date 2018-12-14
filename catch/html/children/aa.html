@@ -7,7 +7,6 @@
 		<link rel="stylesheet" href="../../css/base.css" />
 		<link rel="stylesheet" href="../../css/iconfont.css" />
 		<link rel="stylesheet" href="../../css/layout.css" />
-		
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/ajaxs.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/children.js" type="text/javascript" charset="utf-8"></script>
@@ -31,16 +30,13 @@
 				<source src="video/ycgx.mp4" type='video/mp4; codecs="avc1.4D401E, mp4a.40.2"' >
 			</video>
 		</div>
-		
 <script type="text/javascript">
-		function resizeBody() {
-			var bodyHeight = document.documentElement.clientHeight;
-			var bodyWidth = document.documentElement.clientWidth;
- 
-			$("#video").width((bodyHeight) + "px");
+	function resizeBody() {
+		var bodyHeight = document.documentElement.clientHeight;
+		var bodyWidth = document.documentElement.clientWidth;
+		$("#video").width((bodyHeight) + "px");
 		$("#video").height((bodyWidth) + "px");
- 
-			var video = document.getElementById("video");
+		var video = document.getElementById("video");
 		video.play();
 	}
 	window.onload = function(){			
@@ -48,7 +44,6 @@
 		$("body").css("width","100%").css("height","100%");
 		resizeBody();
 	}
-	
 	var video="";
 	function getRequest() {
   		var url=window.location.search; //获取url中"?"符后的字串
@@ -59,23 +54,11 @@
     		for(var i = 0; i < strs.length; i ++) {
       			theRequest[strs[i].split("=")[0]]=decodeURI(strs[i].split("=")[1]);
     		}
-    		video=theRequest.videos;
-    		console.log(theRequest);//全部参数
-    		console.log(theRequest.usids);//指定参数
-    		console.log(theRequest.vids);//指定参数
-    		console.log(theRequest.videos);//指定参数
-    		/*var kk=theRequest.videos;
-    		var sd=kk.split(",");
-    		console.log(sd);//全部参数
-    		console.log(sd[0]);*/
+    		return theRequest;
   		}
   		return theRequest;
 	}
-	var id=getRequest().id;
-	$("#video>source").attr("src",video);
-	
-	
-	
+	$("#video>source").attr("src",getRequest().videos);
 </script>
 	</body>
 </html>

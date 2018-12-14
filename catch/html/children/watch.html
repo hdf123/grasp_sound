@@ -296,6 +296,11 @@
 				ajaxsd("small/video/add/Comment",'post',parameter,function(data){
 					funms(data);
 					funks();
+					sbs=true;
+					commentsid="";
+					userid="";
+					$("#sends>input").attr("placeholder","留下你的足迹吧");
+					$("#sends>input").val("");
 				},function(err){
 					console.log(err);
 				})

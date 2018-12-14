@@ -2,16 +2,14 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>window、document大小</title>
 		<link rel="stylesheet" href="../../css/base.css" />
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/ajaxs.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 <style>
-  *{
-       margin:0;
-       padding:0;
-   }
+  *{margin:0;padding:0;}
 	body{
 	    background:url(../../img/a_01.png);
 	    background-size:100%;
@@ -38,9 +36,34 @@
 		<div class="guide">立即体验</div>
 <script type="text/javascript">
 	$(function(){
-		$(".guide").click(function(){
-			window.location.href="./login.html";
-		})
+		var one = JSON.parse(localStorage.getItem('one'));//是否第一次下载
+		var logs = JSON.parse(localStorage.getItem('logs'));//是否有登录
+		console.log(one);
+		console.log(JSON.stringify(logs));
+		one==0?func():funs();//是否第一次下载app
+		function funs(){
+			$(".guide").click(function(){
+				window.location.href="./login.html";
+			})
+		}
+		function func(){
+			logs.kkk==6?funk():fungs();//是否有登陆
+			function funk(){//登录过，去首页
+				var parameter={
+					phone:logs.phone,
+					password:logs.password
+				}
+				ajaxGet("user/login",'post',parameter,function(data){
+					localStorage.setItem('TT_TOKEN', JSON.stringify(data.data));
+					window.location.href="./home/home.html";
+				},function(err){
+					console.log(err);
+				})
+			}
+			function fungs(){//退出了，去登录
+				window.location.href="./login.html";
+			}
+		}
 	})
 	
 	/*console.log($(document).height());//不变

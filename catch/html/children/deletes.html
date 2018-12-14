@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>删除视频</title>
+		<link rel="stylesheet" href="../../css/ydui.css">
+		<link rel="stylesheet" href="../../css/demo.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" href="../../css/base.css" />
+		<link rel="stylesheet" href="../../css/iconfont.css" />
+		<link rel="stylesheet" href="../../css/layout.css" />
+		<link rel="stylesheet" href="css/deletes.css" />
+		<script type="text/javascript" src="scripts/jquery-1.8.2.min.js"></script>
+		<script src="../../js/ydui.flexible.js"></script>
+		<script src="../../js/ajaxs.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/children.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<header class="headers">
+			<div class="iconfont icon-houtui" onclick="javascript:history.back(-1);">
+				<div>视频管理</div>
+			</div>
+		</header>	
+		<section class="sets">
+			<div class="ask"></div>
+		</section>
+		<div class="wdows">
+			<div class="ttc">
+				<div>你真的要删除当前视频吗？！</div>
+				<div>
+					<div class="quxiao">取消</div>
+					<div class="quer">确认删除</div>
+				</div>
+			</div>
+		</div>
+<script type="text/javascript">
+	$(function(){
+		var user = JSON.parse(localStorage.getItem('user'));
+		$(".wdows").hide();
+//我的视频
+		var parameter={
+			token:user.token,
+			userId:user.user.userid,
+			page:1,//第几页
+			size:15//每页多少
+		}
+		ajaxsd("app/my/videos",'post',parameter,function(data){
+			console.log(data);
+			if(data.status==321){
+				window.location.href="../login/login.html";
+			}
+			var videos=data.data,ks="";
+			for(i in videos){
+				ks+=`<div class="videos" data-usids=${videos[i].video.userid} data-vids=${videos[i].video.videoId} data-videos=${videos[i].video.video}>
+						<div>
+							<img src=${videos[i].video.picture} alt="" />
+						</div>
+					</div>`;
+			}
+			$(".ask").append(ks);
+	//删除当前视频		
+			var vids="";
+			$(".ask").on("click",".videos",function(){
+				var usids=$(this).data("usids");//发布视频账号id
+				vids=$(this).data("vids");//视频id
+				var videos=$(this).data("videos");//视频地址
+				$(".wdows").show();
+			})
+			$(".quxiao").click(function(){
+				$(".wdows").hide();
+			})
+			$(".quer").click(function(){
+				var parameter={
+					token:user.token,
+					videoId:vids,
+					userId:user.user.userid
+				}
+				ajaxsd("app/my/delete/small/video",'post',parameter,function(data){
+					console.log(data);
+					if(data.status==200){
+						$(".wdows").hide();
+						window.location.reload();
+					}else if(data.status==321){
+						window.location.href="../login/login.html";
+					}
+				},function(err){
+					console.log(err);
+				})
+			})
+		},function(err){
+			console.log(err);
+		})
+	})
+</script>
+	</body>
+</html>

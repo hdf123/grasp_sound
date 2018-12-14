@@ -27,9 +27,6 @@
 				<div>发送</div>
 			</div>
 		</footer>
-		
-		
-		
 <script type="text/javascript">
 	$(function(){
 		var user = JSON.parse(localStorage.getItem('user'));
@@ -57,6 +54,7 @@
 									<div class="rights">${bodys}</div>
 									<div class="portraits"><img src=${user.user.portrait} /></div>
 								</div>`);
+			$('section').scrollTop($('.speak')[0].scrollHeight);
 			var parameter={
 				token:user.token,
 				from:ids,//发送者 accid
@@ -85,7 +83,6 @@
 				data.reverse();//颠倒获取的历史记录顺序
 				console.log(data);
 				for(i in data){
-//					console.log(data[i]);
 					if(data[i].sendtime>times){
 						times=data[i].sendtime;
 						if(data[i].from==ids){
@@ -95,6 +92,7 @@
 												+'</div>');
 							$(".gh").remove();
 							$('section').scrollTop($('.speak')[0].scrollHeight);
+							console.log($('.speak')[0].scrollHeight);
 						}else{
 							$(".speak").append('<div class="friend">'
 													+'<div  class="lefs"><img src='+arr[1]+' /></div>'
@@ -125,33 +123,6 @@
 				console.log(err);
 			})
 		}
-		//添加未读好友消息的标记
-		/*var msgid = JSON.parse(localStorage.getItem('msgid'));
-		console.log(msgid);
-		var parameter={
-			token:user.token,
-			userID:ids,
-			friendId:arr[2],
-			msgid:data[i].msgid
-			
-		}
-		console.log(parameter);
-		ajaxsd("wangyi/im/SingleChat/add/unread/msg/flag",'post',parameter,function(data){
-			console.log(data);
-		},function(err){
-			console.log(err);
-		})*/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	})
 </script>
 	</body>

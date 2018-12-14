@@ -1,0 +1,69 @@
+.sets {
+  top: 3.5rem;
+  bottom: 0;
+  overflow: auto;
+}
+
+.ask {
+  width: 100%;
+  margin-top: 0.5rem;
+  overflow: auto;
+}
+.ask > div {
+  width: 33.3333333333%;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  float: left;
+}
+.ask > div > div {
+  width: 85%;
+  height: 100%;
+}
+.ask > div > div > img {
+  width: 100%;
+  height: 100%;
+}
+
+.wdows {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(128, 128, 128, 0.8);
+}
+
+.ttc {
+  width: 50%;
+  height: 16%;
+  background: white;
+  border-radius: 0.3rem;
+  position: absolute;
+  top: 45%;
+  left: 25%;
+}
+.ttc > div:nth-child(1) {
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #d2d2d2;
+}
+.ttc > div:nth-child(2) {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+.ttc > div:nth-child(2) > div {
+  padding: 0.1rem 0.3rem;
+  border: 1px solid gainsboro;
+  border-radius: 0.3rem;
+}
+
+/*# sourceMappingURL=deletes.css.map */
